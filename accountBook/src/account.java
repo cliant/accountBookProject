@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class account{
     public static void main(String[] args) throws Exception{
         Count count=new Count();
- //ㅁㅁㅁaaaaa
+
         while(true){
             count.menu();
  
@@ -32,7 +32,7 @@ public class account{
  
 class Count{
     TreeMap<String,Integer> IncomeMap=new TreeMap<String,Integer>();
-    //수입 트리ㅇ
+    //수입 트리
     TreeMap<String,Integer> OutlayMap=new TreeMap<String,Integer>();
     //지출 트리
     TreeMap<String,Integer> DebtMap=new TreeMap<String,Integer>();
