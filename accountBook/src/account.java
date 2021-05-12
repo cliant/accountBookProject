@@ -32,7 +32,7 @@ public class account{
  
 class Count{
     TreeMap<String,Integer> IncomeMap=new TreeMap<String,Integer>();
-    //수입 트리
+    //수입 트리ㅇ
     TreeMap<String,Integer> OutlayMap=new TreeMap<String,Integer>();
     //지출 트리
     TreeMap<String,Integer> DebtMap=new TreeMap<String,Integer>();
