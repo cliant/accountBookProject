@@ -28,7 +28,7 @@ public class account{
             else continue;
         }
     }
-}
+} //
  
 class Count{
     TreeMap<String,Integer> IncomeMap=new TreeMap<String,Integer>();
@@ -126,7 +126,7 @@ class Count{
                 continue;
             }
             break;
-        }
+        } 
  
         System.out.println("==이자계산==");
         System.out.println("현재날짜:"+this.currDate);
