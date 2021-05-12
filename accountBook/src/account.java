@@ -292,7 +292,7 @@ class Count{
         while(keyIteratorIn.hasNext()){
             String keyIn=keyIteratorIn.next();
             Integer valueIn=IncomeMap.get(keyIn);
-            fwIn.write(keyIn+"&"+valueIn+"\r\n");
+            fwIn.write("수입) "+keyIn+" = "+valueIn+"원"+"\r\n");
         }
         fwIn.flush();
         fwIn.close();
@@ -302,7 +302,7 @@ class Count{
         while(keyIteratorOut.hasNext()){
             String keyOut=keyIteratorOut.next();
             Integer valueOut=OutlayMap.get(keyOut);
-            fwOut.write(keyOut+"&"+valueOut+"\r\n");
+            fwOut.write("지출) "+keyOut+" = "+valueOut+"원"+"\r\n");
         }
         fwOut.flush();
         fwOut.close();
