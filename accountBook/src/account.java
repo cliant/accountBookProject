@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class account{
     public static void main(String[] args) throws Exception{
         Count count=new Count();
- 
+ //ã…ã…ã…
         while(true){
             count.menu();
  
@@ -32,153 +32,153 @@ public class account{
  
 class Count{
     TreeMap<String,Integer> IncomeMap=new TreeMap<String,Integer>();
-    //¼öÀÔ Æ®¸®
+    //ìˆ˜ì… íŠ¸ë¦¬
     TreeMap<String,Integer> OutlayMap=new TreeMap<String,Integer>();
-    //ÁöÃâ Æ®¸®
+    //ì§€ì¶œ íŠ¸ë¦¬
     TreeMap<String,Integer> DebtMap=new TreeMap<String,Integer>();
-    //ºÎÃ¤ Æ®¸®
+    //ë¶€ì±„ íŠ¸ë¦¬
  
-    //ºÎÃ¤ ÀÌÀÚ º¯¼ö
+    //ë¶€ì±„ ì´ì ë³€ìˆ˜
     int ija;
-    //ºÎÃ¤ ÀÌÀ² º¯¼ö
+    //ë¶€ì±„ ì´ìœ¨ ë³€ìˆ˜
     int iyul;
-    //ºÎÃ¤¹ŞÀº³â¿ù
+    //ë¶€ì±„ë°›ì€ë…„ì›”
     LocalDate currDate=LocalDate.now();
-    //ºÎÃ¤°¡ °è»êµÇ´Â ³â¿ù
+    //ë¶€ì±„ê°€ ê³„ì‚°ë˜ëŠ” ë…„ì›”
     LocalDate nextDate=LocalDate.now();
-    //¿¾³¯ ³¯Â¥
+    //ì˜›ë‚  ë‚ ì§œ
     LocalDate oldDate=null;
-    //ÆÄÀÏºÒ·¯¿Ã¶§ µ¥ÀÌÅÍ »ó¼ö
+    //íŒŒì¼ë¶ˆëŸ¬ì˜¬ë•Œ ë°ì´í„° ìƒìˆ˜
     static final int SIZE=1000000;
-    //¸Ş´º
-    public void menu() throws Exception{  //¿¹¿ÜÃ³¸®?
-        System.out.printf("¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤\n");
-        System.out.printf("¦¢           1. ¼öÀÔ ÀÔ·Â             ¦¢\n");
-        System.out.printf("¦¢           2. ÁöÃâ ÀÔ·Â             ¦¢\n");
-        System.out.printf("¦¢           3. ºÎÃ¤ ÀÔ·Â             ¦¢\n");
-        System.out.printf("¦¢           4. ÀåºÎ º¸±â             ¦¢\n");
-        System.out.printf("¦¢           5. ºÒ·¯ ¿À±â             ¦¢\n");
-        System.out.printf("¦¢           6. ÀúÀå ÇÏ±â             ¦¢\n");
-        System.out.printf("¦¢           7. ¸Ş¸ğ¸®ÇØÁ¦            ¦¢\n");
-        System.out.printf("¦¢           8. Á¾     ·á             ¦¢\n");
-        System.out.printf("¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥\n");
-        System.out.print("ÀÔ·Â:>>");
+    //ë©”ë‰´
+    public void menu() throws Exception{  //ì˜ˆì™¸ì²˜ë¦¬?
+        System.out.printf("â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”\n");
+        System.out.printf("â”‚           1. ìˆ˜ì… ì…ë ¥             â”‚\n");
+        System.out.printf("â”‚           2. ì§€ì¶œ ì…ë ¥             â”‚\n");
+        System.out.printf("â”‚           3. ë¶€ì±„ ì…ë ¥             â”‚\n");
+        System.out.printf("â”‚           4. ì¥ë¶€ ë³´ê¸°             â”‚\n");
+        System.out.printf("â”‚           5. ë¶ˆëŸ¬ ì˜¤ê¸°             â”‚\n");
+        System.out.printf("â”‚           6. ì €ì¥ í•˜ê¸°             â”‚\n");
+        System.out.printf("â”‚           7. ë©”ëª¨ë¦¬í•´ì œ            â”‚\n");
+        System.out.printf("â”‚           8. ì¢…     ë£Œ             â”‚\n");
+        System.out.printf("â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜\n");
+        System.out.print("ì…ë ¥:>>");
  
     }
-    //¼öÀÔ
+    //ìˆ˜ì…
     public void income() throws Exception{
         Scanner scanner=new Scanner(System.in);
  
-        System.out.println("==°¡°èºÎ ¼öÀÔ ÀÔ·Â==");
-        System.out.print("¼öÀÔÇ×¸ñÀÔ·Â:>>");
+        System.out.println("==ê°€ê³„ë¶€ ìˆ˜ì… ì…ë ¥==");
+        System.out.print("ìˆ˜ì…í•­ëª©ì…ë ¥:>>");
         String instr=scanner.nextLine();
  
-        System.out.print("¼öÀÔµ·ÀÔ·Â:>>");
+        System.out.print("ìˆ˜ì…ëˆì…ë ¥:>>");
         Integer inmonstr=scanner.nextInt();
-      //wrapper Å¬·¡½º, null°ª Ã³¸® ¿ëÀÌ
+      //wrapper í´ë˜ìŠ¤, nullê°’ ì²˜ë¦¬ ìš©ì´
  
         IncomeMap.put(instr,inmonstr);
-        System.out.println("¼öÀÔµÇ¾ú½À´Ï´Ù.");
+        System.out.println("ìˆ˜ì…ë˜ì—ˆìŠµë‹ˆë‹¤.");
     }
-    //ÁöÃâ
+    //ì§€ì¶œ
     public void outlay() throws Exception{
         Scanner scanner=new Scanner(System.in);
  
-        System.out.println("==°¡°èºÎ ÁöÃâ ÀÔ·Â==");
-        System.out.print("ÁöÃâÇ×¸ñÀÔ·Â:>>");
+        System.out.println("==ê°€ê³„ë¶€ ì§€ì¶œ ì…ë ¥==");
+        System.out.print("ì§€ì¶œí•­ëª©ì…ë ¥:>>");
         String outstr=scanner.nextLine();
  
-        System.out.print("ÁöÃâµ·ÀÔ·Â:>>");
+        System.out.print("ì§€ì¶œëˆì…ë ¥:>>");
         Integer outmonstr=scanner.nextInt();
  
         OutlayMap.put(outstr,outmonstr);
-        System.out.println("ÁöÃâµÇ¾ú½À´Ï´Ù.");
+        System.out.println("ì§€ì¶œë˜ì—ˆìŠµë‹ˆë‹¤.");
     }
-    //ºÎÃ¤
+    //ë¶€ì±„
     public void debt() throws Exception{
         Scanner scanner=new Scanner(System.in);
  
-        System.out.println("==°¡°èºÎ ºÎÃ¤ ÀÔ·Â==");
-        System.out.print("ºÎÃ¤Ç×¸ñÀÔ·Â:>>");
+        System.out.println("==ê°€ê³„ë¶€ ë¶€ì±„ ì…ë ¥==");
+        System.out.print("ë¶€ì±„í•­ëª©ì…ë ¥:>>");
         String destr=scanner.nextLine();
  
-        System.out.print("ºÎÃ¤µ·ÀÔ·Â:>>");
+        System.out.print("ë¶€ì±„ëˆì…ë ¥:>>");
         Integer demonstr=scanner.nextInt();
  
         while(true){
-            System.out.println("0=¿ùÀÌÀÚ 1=³âÀÌÀÚ");
-            System.out.print("ÀÔ·Â:>>");
+            System.out.println("0=ì›”ì´ì 1=ë…„ì´ì");
+            System.out.print("ì…ë ¥:>>");
             this.ija=scanner.nextInt();
  
             if(this.ija<0 || this.ija>1){
-                System.out.println("Àß¸øÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.");
+                System.out.println("ì˜ëª»ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤.");
                 continue;
             }
             break;
         }
  
         while(true){
-            System.out.print("ÀÌÀ²(ÆÛ¼¾Æ®)ÀÔ·Â>>");
+            System.out.print("ì´ìœ¨(í¼ì„¼íŠ¸)ì…ë ¥>>");
             this.iyul=scanner.nextInt();
  
             if(this.iyul<0){
-                System.out.println("Àß¸øÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.");
+                System.out.println("ì˜ëª»ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤.");
                 continue;
             }
             break;
         }
  
-        System.out.println("==ÀÌÀÚ°è»ê==");
-        System.out.println("ÇöÀç³¯Â¥:"+this.currDate);
+        System.out.println("==ì´ìê³„ì‚°==");
+        System.out.println("í˜„ì¬ë‚ ì§œ:"+this.currDate);
  
         if(this.ija==0)
-            System.out.println("¿ùÀÌÀÚ--"+this.iyul*demonstr/100+"¿ø ÀÔ´Ï´Ù.");
+            System.out.println("ì›”ì´ì--"+this.iyul*demonstr/100+"ì› ì…ë‹ˆë‹¤.");
         else if(this.ija==1)
-            System.out.println("³âÀÌÀÚ--"+this.iyul*demonstr/100+"¿ø ÀÔ´Ï´Ù.");
+            System.out.println("ë…„ì´ì--"+this.iyul*demonstr/100+"ì› ì…ë‹ˆë‹¤.");
  
         DebtMap.put(destr,demonstr);
-        System.out.println("ºÎÃ¤µÇ¾ú½À´Ï´Ù.");
+        System.out.println("ë¶€ì±„ë˜ì—ˆìŠµë‹ˆë‹¤.");
     }
-    //ÀåºÎ
+    //ì¥ë¶€
     public void book() throws Exception{
         Scanner scanner=new Scanner(System.in);
  
-        System.out.println("==°¡°èºÎ ÀåºÎ º¸±â==");
+        System.out.println("==ê°€ê³„ë¶€ ì¥ë¶€ ë³´ê¸°==");
  
-        System.out.println("¼öÀÔ³»¿ª:");
+        System.out.println("ìˆ˜ì…ë‚´ì—­:");
  
         Set<String> keySetIn=IncomeMap.keySet();
         Iterator<String> keyIteratorIn=keySetIn.iterator();
         while(keyIteratorIn.hasNext()){
             String keyIn=keyIteratorIn.next();
             Integer valueIn=IncomeMap.get(keyIn);
-            System.out.println(keyIn+"\t"+valueIn+"¿ø");
+            System.out.println(keyIn+"\t"+valueIn+"ì›");
         }
         System.out.println("===================");
  
-        System.out.println("ÁöÃâ³»¿ª:");
+        System.out.println("ì§€ì¶œë‚´ì—­:");
  
         Set<String> keySetOut=OutlayMap.keySet();
         Iterator<String> keyIteratorOut=keySetOut.iterator();
         while(keyIteratorOut.hasNext()){
             String keyOut=keyIteratorOut.next();
             Integer valueOut=OutlayMap.get(keyOut);
-            System.out.println(keyOut+"\t"+valueOut+"¿ø");
+            System.out.println(keyOut+"\t"+valueOut+"ì›");
         }
         System.out.println("===================");
  
-        System.out.println("ºÎÃ¤³»¿ª:");
+        System.out.println("ë¶€ì±„ë‚´ì—­:");
  
         Set<String> keySetDebt=DebtMap.keySet();
         Iterator<String> keyIteratorDebt=keySetDebt.iterator();
         while(keyIteratorDebt.hasNext()){
             String keyDebt=keyIteratorDebt.next();
             Integer valueDebt=DebtMap.get(keyDebt);
-            System.out.println(keyDebt+"\t"+valueDebt+"¿ø");
+            System.out.println(keyDebt+"\t"+valueDebt+"ì›");
         }
         System.out.println("===================");
  
-        System.out.println("ºÎÃ¤ÀÌÀÚ³»¿ª¼­:");
+        System.out.println("ë¶€ì±„ì´ìë‚´ì—­ì„œ:");
  
         if(this.oldDate!=null){
             this.currDate=this.oldDate;
@@ -193,20 +193,20 @@ class Count{
             String keyDebt_1=keyIteratorDebt_1.next();
             Integer valueDebt_1=DebtMap.get(keyDebt_1);
             if(this.ija==0){
-                System.out.println(keyDebt_1+"--¿ùÀÌÀÚ:"+valueDebt_1*this.iyul/100*afterMonth+"¿ø");
+                System.out.println(keyDebt_1+"--ì›”ì´ì:"+valueDebt_1*this.iyul/100*afterMonth+"ì›");
             }
             else if(this.ija==1){
-                System.out.println(keyDebt_1+"--³âÀÌÀÚ:"+valueDebt_1*this.iyul/100*afterYear+"¿ø");
+                System.out.println(keyDebt_1+"--ë…„ì´ì:"+valueDebt_1*this.iyul/100*afterYear+"ì›");
             }
         }
     }
-    //ºÒ·¯¿À±â
+    //ë¶ˆëŸ¬ì˜¤ê¸°
     public void load() throws Exception{
         Scanner scanner = new Scanner(System.in);
-        System.out.println("==°¡°èºÎ ºÒ·¯¿À±â==");
+        System.out.println("==ê°€ê³„ë¶€ ë¶ˆëŸ¬ì˜¤ê¸°==");
  
-        //³¯Â¥ ÀÔ·ÂÀº ½Ç·Ê·Î "2019-12-19"·Î ÀÔ·ÂÇÏ¼¼¿ä.
-        System.out.print("³¯Â¥(³â¿ùÀÏ)ÀÔ·Â:>>");
+        //ë‚ ì§œ ì…ë ¥ì€ ì‹¤ë¡€ë¡œ "2019-12-19"ë¡œ ì…ë ¥í•˜ì„¸ìš”.
+        System.out.print("ë‚ ì§œ(ë…„ì›”ì¼)ì…ë ¥:>>");
         String fileDate=scanner.next();
  
         File fileIn=new File("income"+fileDate+".dat");
@@ -267,14 +267,14 @@ class Count{
                 String[] Datasp_i_2=token_2.split("&");
                 String Datasp_is_2=new String(Datasp_i_2[0]);
                 Integer Datasp_ii_2=new Integer(Datasp_i_2[1]);
-                oldDate=LocalDate.parse(Datasp_i_2[2]); //¿¾³¯ ³¯Â¥ ºÒ·¯¿À±â
+                oldDate=LocalDate.parse(Datasp_i_2[2]); //ì˜›ë‚  ë‚ ì§œ ë¶ˆëŸ¬ì˜¤ê¸°
                 DebtMap.put(Datasp_is_2,Datasp_ii_2);
            }
         }
         frDebt.close();
-        System.out.println("ºÒ·¯¿À±âµÇ¾ú½À´Ï´Ù.");
+        System.out.println("ë¶ˆëŸ¬ì˜¤ê¸°ë˜ì—ˆìŠµë‹ˆë‹¤.");
     }
-    //ÀúÀåÇÏ±â
+    //ì €ì¥í•˜ê¸°
     public void save() throws Exception{
         File fileIn=new File("income"+this.currDate+".dat");
         FileWriter fwIn=new FileWriter(fileIn,true);
@@ -285,7 +285,7 @@ class Count{
         File fileDebt=new File("debt"+this.currDate+".dat");
         FileWriter fwDebt=new FileWriter(fileDebt,true);
  
-        System.out.println("==°¡°èºÎ ÀúÀå==");
+        System.out.println("==ê°€ê³„ë¶€ ì €ì¥==");
  
         Set<String> keySetIn=IncomeMap.keySet();
         Iterator<String> keyIteratorIn=keySetIn.iterator();
@@ -317,9 +317,9 @@ class Count{
         fwDebt.flush();
         fwDebt.close();
  
-        System.out.println("ÀúÀåµÇ¾ú½À´Ï´Ù.");
+        System.out.println("ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤.");
     }
-    //¸Ş¸ğ¸®ÇØÁ¦
+    //ë©”ëª¨ë¦¬í•´ì œ
     public void mout() throws Exception{
         IncomeMap.clear();
         OutlayMap.clear();
@@ -327,11 +327,11 @@ class Count{
  
         this.oldDate=null;
  
-        System.out.println("¸Ş¸ğ¸® ÇØÁ¦µÇ¾ú½À´Ï´Ù.");
+        System.out.println("ë©”ëª¨ë¦¬ í•´ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
     }
-    //³¡¸¶Ä§
+    //ëë§ˆì¹¨
     public void end() throws Exception{
-        System.out.println("³¡¸¶Ä¡°Ú½À´Ï´Ù.");
+        System.out.println("ëë§ˆì¹˜ê² ìŠµë‹ˆë‹¤.");
         System.exit(0);
     }
 }
