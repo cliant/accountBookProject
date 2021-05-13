@@ -67,18 +67,27 @@ class Count{
     }
     //수입
     public void income() throws Exception{
-        Scanner scanner=new Scanner(System.in);
- 
+       Scanner scanner=new Scanner(System.in);
         System.out.println("==가계부 수입 입력==");
-        System.out.print("수입항목입력:>>");
+        System.out.print("----------<수입항목>----------\n");
+        System.out.print("소득-월급,상여금,이자 및 배당금의 수입액\n");
+        System.out.print("저축-예금,적금등의 만기\n");
+        System.out.print("차입-빌린돈 \n");
+        System.out.print("ex)수입항목입력>> 예금\n");
+        System.out.print("수입항목입력>>");
         String instr=scanner.nextLine();
- 
+        String rm_blank=instr.trim(); // 입력받은 문자열 공백 제거
+        System.out.println("수입항목으로 "+rm_blank+" 이(가)입력되었습니다.");
         System.out.print("수입돈입력:>>");
         Integer inmonstr=scanner.nextInt();
-      //wrapper 클래스, null값 처리 용이
  
-        IncomeMap.put(instr,inmonstr);
-        System.out.println("수입되었습니다.");
+        if(OutlayMap.containsKey(rm_blank))  // key 값 중복 확인
+        {
+        	Integer money=OutlayMap.get(rm_blank);
+        	OutlayMap.put(rm_blank, money+inmonstr); // key중복시 value를 더해서 저장	
+        }
+        else OutlayMap.put(rm_blank,inmonstr); 
+    System.out.println("수입되었습니다.");
     }
     //지출
     public void outlay() throws Exception{
