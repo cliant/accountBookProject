@@ -73,7 +73,7 @@ class Count{
         System.out.print("소득-월급,상여금,이자 및 배당금의 수입액\n");
         System.out.print("저축-예금,적금등의 만기\n");
         System.out.print("차입-빌린돈 \n");
-        System.out.print("ex)수입항목입력>> 예금\n");
+        System.out.print("ex)수입항목입력>> 자유형식(예금)\n");
         System.out.print("수입항목입력>>");
         String instr=scanner.nextLine();
         String rm_blank=instr.trim(); // 입력받은 문자열 공백 제거
@@ -91,16 +91,25 @@ class Count{
     }
     //지출
     public void outlay() throws Exception{
-        Scanner scanner=new Scanner(System.in);
+         Scanner scanner=new Scanner(System.in);
  
         System.out.println("==가계부 지출 입력==");
+        System.out.print("----------<지출항목>----------\n");
+        System.out.print("가스비,통신비,교통비,보험료,육아,의료비 등\n");
+        System.out.print("ex)지출항목입력>> 자유형식(대출)\n");
         System.out.print("지출항목입력:>>");
         String outstr=scanner.nextLine();
- 
+        String rm_blank=outstr.trim(); // 입력받은 문자열 공백 제거
+        System.out.println("지출항목으로 "+rm_blank+" 이(가)입력되었습니다.");
         System.out.print("지출돈입력:>>");
         Integer outmonstr=scanner.nextInt();
  
-        OutlayMap.put(outstr,outmonstr);
+        if(OutlayMap.containsKey(rm_blank))  //key 값 중복확인
+        {
+        	Integer money=OutlayMap.get(rm_blank);
+        	OutlayMap.put(rm_blank, money+outmonstr); // key중복시 value를 더해서 저장	
+        }
+        else OutlayMap.put(rm_blank,outmonstr);
         System.out.println("지출되었습니다.");
     }
     //부채
