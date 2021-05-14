@@ -226,27 +226,33 @@ class Count{
         //날짜 입력은 실례로 "2019-12-19"로 입력하세요.
         System.out.print("날짜(년월일)입력:>>");
         String fileDate=scanner.next();
- 
-        File fileIn=new File("income"+fileDate+".dat");
+       
+        if((checkFile(fileDate))){
+        
+        File fileIn=new File("income"+fileDate+".txt");
         FileReader frIn=new FileReader(fileIn);
  
-        File fileOut=new File("outlay"+fileDate+".dat");
+        File fileOut=new File("outlay"+fileDate+".txt");
         FileReader frOut=new FileReader(fileOut);
  
-        File fileDebt=new File("debt"+fileDate+".dat");
+        File fileDebt=new File("debt"+fileDate+".txt");
         FileReader frDebt=new FileReader(fileDebt);
- 
+        
+       
         int readCharNo;
         char[] cbuf=new char[SIZE];
+        //키값
  
         while((readCharNo=frIn.read(cbuf)) != -1){
             String iData=new String(cbuf,0,readCharNo);
+            //0 ~ readCharNo까지 문자열 생성
  
             StringTokenizer Datasp=new StringTokenizer(iData,"\r\n");
+            // \r\n으로 문자열 쪼개기
  
-            while(Datasp.hasMoreTokens()){
-                String token=Datasp.nextToken();
-                String[] Datasp_i=token.split("&");
+            while(Datasp.hasMoreTokens()){ //토큰이 남아있는지 여부
+                String token=Datasp.nextToken();  //구분자로 쪼개진 문자열 반환
+                String[] Datasp_i=token.split(":"); //&기준으로 찢어 string 형 배열로 반환
                 String Datasp_is=new String(Datasp_i[0]);
                 Integer Datasp_ii=new Integer(Datasp_i[1]);
                 IncomeMap.put(Datasp_is,Datasp_ii);
@@ -264,7 +270,7 @@ class Count{
  
             while(Datasp_1.hasMoreTokens()){
                 String token_1=Datasp_1.nextToken();
-                String[] Datasp_i_1=token_1.split("&");
+                String[] Datasp_i_1=token_1.split(":");
                 String Datasp_is_1=new String(Datasp_i_1[0]);
                 Integer Datasp_ii_1=new Integer(Datasp_i_1[1]);
                 OutlayMap.put(Datasp_is_1,Datasp_ii_1);
@@ -282,7 +288,7 @@ class Count{
  
             while(Datasp_2.hasMoreTokens()){
                 String token_2=Datasp_2.nextToken();
-                String[] Datasp_i_2=token_2.split("&");
+                String[] Datasp_i_2=token_2.split(":");
                 String Datasp_is_2=new String(Datasp_i_2[0]);
                 Integer Datasp_ii_2=new Integer(Datasp_i_2[1]);
                 oldDate=LocalDate.parse(Datasp_i_2[2]); //옛날 날짜 불러오기
@@ -291,16 +297,38 @@ class Count{
         }
         frDebt.close();
         System.out.println("불러오기되었습니다.");
+        
+        //불러온 내용 출력
+        
+        System.out.println("수입 목록");
+        for (Entry<String, Integer> entry : IncomeMap.entrySet()) {
+            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+        }
+        
+        System.out.println("지출 목록");
+        for (Entry<String, Integer> entry : OutlayMap.entrySet()) {
+            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+        }
+        
+        System.out.println("부채 목록");
+        for (Entry<String, Integer> entry : DebtMap.entrySet()) {
+            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+        }
+        }
+        else {
+        	System.out.println("파일이 없습니다.");
+        }
     }
     //저장하기
-    public void save() throws Exception{
-        File fileIn=new File("income"+this.currDate+".dat");
+   public void save() throws Exception{
+        File fileIn=new File("income"+this.currDate+".txt");
         FileWriter fwIn=new FileWriter(fileIn,true);
+        //추가모드
  
-        File fileOut=new File("outlay"+this.currDate+".dat");
+        File fileOut=new File("outlay"+this.currDate+".txt");
         FileWriter fwOut=new FileWriter(fileOut,true);
  
-        File fileDebt=new File("debt"+this.currDate+".dat");
+        File fileDebt=new File("debt"+this.currDate+".txt");
         FileWriter fwDebt=new FileWriter(fileDebt,true);
  
         System.out.println("==가계부 저장==");
@@ -310,7 +338,7 @@ class Count{
         while(keyIteratorIn.hasNext()){
             String keyIn=keyIteratorIn.next();
             Integer valueIn=IncomeMap.get(keyIn);
-            fwIn.write("수입) "+keyIn+" = "+valueIn+"원"+"\r\n");
+            fwIn.write(keyIn+":"+valueIn+"\r\n");
         }
         fwIn.flush();
         fwIn.close();
@@ -320,7 +348,7 @@ class Count{
         while(keyIteratorOut.hasNext()){
             String keyOut=keyIteratorOut.next();
             Integer valueOut=OutlayMap.get(keyOut);
-            fwOut.write("지출) "+keyOut+" = "+valueOut+"원"+"\r\n");
+            fwOut.write(keyOut+":"+valueOut+"\r\n");
         }
         fwOut.flush();
         fwOut.close();
@@ -330,13 +358,14 @@ class Count{
         while(keyIteratorDebt.hasNext()){
             String keyDebt=keyIteratorDebt.next();
             Integer valueDebt=DebtMap.get(keyDebt);
-            fwDebt.write(keyDebt+"&"+valueDebt+"&"+this.currDate+"\r\n");
+            fwDebt.write(keyDebt+":"+valueDebt+":"+this.currDate+"\r\n");
         }
         fwDebt.flush();
         fwDebt.close();
  
         System.out.println("저장되었습니다.");
     }
+    
     //메모리해제
     public void mout() throws Exception{
         IncomeMap.clear();
@@ -352,4 +381,10 @@ class Count{
         System.out.println("끝마치겠습니다.");
         System.exit(0);
     }
+ public boolean checkFile(String fileDate) {
+    	File file = new File("income"+fileDate+".txt");
+    	return file.exists();
+    }
+ 
+ 
 }
