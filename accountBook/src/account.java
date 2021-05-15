@@ -12,20 +12,21 @@ public class account{
         while(true){
             count.menu();
  
-            InputStream is=System.in;
-            Reader reader=new InputStreamReader(is);
-            BufferedReader br=new BufferedReader(reader);
-            char No=(char)br.read();
- 
-            if(No=='1') count.income();
-            else if(No=='2') count.outlay();
-            else if(No=='3') count.debt();
-            else if(No=='4') count.book();
-            else if(No=='5') count.load();
-            else if(No=='6') count.save();
-            else if(No=='7') count.mout();
-            else if(No=='8') count.end();
-            else continue;
+            Scanner s = new Scanner(System.in);
+            String choice = s.nextLine();
+            String No=choice.trim();  // 앞뒤 공백제거
+            if(No.equals("1")) count.income();
+            else if(No.equals("2")) count.outlay();
+            else if(No.equals("3")) count.debt();
+            else if(No.equals("4")) count.book();
+            else if(No.equals("5")) count.load();
+            else if(No.equals("6")) count.save();
+            else if(No.equals("7")) count.mout();
+            else if(No.equals("8")) count.end();
+            else {
+            	 System.out.println("1~8 사이의 숫자를 입력해주세요.");
+            	 	continue;
+            	 	}
         }
     }
 } 
@@ -76,7 +77,7 @@ class Count{
         System.out.print("ex)수입항목입력>> 자유형식(예금)\n");
         System.out.print("수입항목입력>>");
         String instr=scanner.nextLine();
-        String rm_blank=instr.trim(); // 입력받은 문자열 공백 제거
+        String rm_blank=instr.trim(); // 입력받은 문자열 앞뒤 공백 제거
         System.out.println("수입항목으로 "+rm_blank+" 이(가)입력되었습니다.");
         System.out.print("수입돈입력:>>");
         Integer inmonstr=scanner.nextInt();
@@ -99,7 +100,7 @@ class Count{
         System.out.print("ex)지출항목입력>> 자유형식(대출)\n");
         System.out.print("지출항목입력:>>");
         String outstr=scanner.nextLine();
-        String rm_blank=outstr.trim(); // 입력받은 문자열 공백 제거
+        String rm_blank=outstr.trim(); // 입력받은 문자열 앞뒤 공백 제거
         System.out.println("지출항목으로 "+rm_blank+" 이(가)입력되었습니다.");
         System.out.print("지출돈입력:>>");
         Integer outmonstr=scanner.nextInt();
