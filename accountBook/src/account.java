@@ -84,7 +84,7 @@ class Count{
  
         if(IncomeMap.containsKey(rm_blank))  // key 값 중복 확인
         {
-        	Integer money=OutlayMap.get(rm_blank);
+        	Integer money=IncomeMap.get(rm_blank);
         	IncomeMap.put(rm_blank, money+inmonstr); // key중복시 value를 더해서 저장	
         }
         else IncomeMap.put(rm_blank,inmonstr); 
