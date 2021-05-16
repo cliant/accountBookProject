@@ -22,9 +22,10 @@ public class account{
             else if(No.equals("5")) count.load();
             else if(No.equals("6")) count.save();
             else if(No.equals("7")) count.mout();
-            else if(No.equals("8")) count.end();
+            else if(No.equals("8")) count.modify();
+            else if(No.equals("9")) count.end();
             else {
-            	 System.out.println("1~8 사이의 숫자를 입력해주세요.");
+            	 System.out.println("1~9 사이의 숫자를 입력해주세요.");
             	 	continue;
             	 	}
         }
@@ -61,7 +62,8 @@ class Count{
         System.out.printf("│           5. 불러 오기             │\n");
         System.out.printf("│           6. 저장 하기             │\n");
         System.out.printf("│           7. 메모리해제            │\n");
-        System.out.printf("│           8. 종     료             │\n");
+        System.out.printf("│           8. 수정 하기             │\n");
+        System.out.printf("│           9. 종     료             │\n");
         System.out.printf("└──────────────────┘\n");
         System.out.print("입력:>>");
  
@@ -423,6 +425,98 @@ class Count{
         this.oldDate=null;
  
         System.out.println("메모리 해제되었습니다.");
+    }
+  // 이터 항목 금액 수정하기
+    public void modify() {
+    	Scanner s = new Scanner(System.in);
+    	   System.out.printf("┌──────────────────┐\n");
+        System.out.printf("│           1. 수입 수정             │\n");
+        System.out.printf("│           2. 지출 수정             │\n");
+        System.out.printf("│           3. 부채 수정             │\n");
+        System.out.printf("│           4. 메뉴로 가기             │\n");
+        System.out.printf("└──────────────────┘\n");
+        System.out.print("입력:>>");
+    	String choice = s.nextLine();
+    	String No = choice.trim(); //공백제거
+    	
+    	switch(No)
+    	{
+    	case "1" :
+    		System.out.print("수정할 항목 입력>>");
+    		String mod= s.nextLine();
+    		String mod_in= mod.trim();
+    		if(IncomeMap.containsKey(mod_in))
+    		{
+    			Integer value = IncomeMap.get(mod_in);
+    			System.out.print("수정할 금액 입력>>");
+    			Integer money= s.nextInt();
+    			IncomeMap.put(mod_in, money);
+    			System.out.println("----------수정전-----------");
+    			System.out.println("[항목]:" + mod_in + " [금액]:" + value+"\n");
+    			System.out.println("----------수정후-----------");
+    			System.out.println("[항목]:" + mod_in + " [금액]:" + IncomeMap.get(mod_in)+"\n");
+    			System.out.println("수입이 성공적으로 수정되었습니다.");
+    			break;   			
+    		}
+    		else {
+    			System.out.println("입력한 항목 "+mod_in+"이(가) 존재하지 않습니다.");
+    			this.modify();
+    		}
+    		   break;
+    		
+    	case "2" :
+    		System.out.print("수정할 항목 입력>>");
+    		String mod2= s.nextLine();
+    		String mod_out= mod2.trim();
+    		if(OutlayMap.containsKey(mod_out))
+    		{
+    			Integer value2 = OutlayMap.get(mod_out);
+    			System.out.print("수정할 금액 입력>>");
+    			Integer money2= s.nextInt();
+    			OutlayMap.put(mod_out, money2);
+    			System.out.println("----------수정전-----------");
+    			System.out.println("[항목]:" + mod_out + " [금액]:" + value2+"\n");
+    			System.out.println("----------수정후-----------");
+    			System.out.println("[항목]:" + mod_out + " [금액]:" + OutlayMap.get(mod_out)+"\n");
+    			System.out.println("지출이 성공적으로 수정되었습니다.");
+    			break;   			
+    		}
+    		else {
+    			System.out.println("입력한 항목 "+mod_out+"이(가) 존재하지 않습니다.");
+    			this.modify();
+    		}
+    		   break;
+    	case "3" :
+    		System.out.print("수정할 항목 입력>>");
+    		String mod3= s.nextLine();
+    		String mod_db= mod3.trim();
+    		if(DebtMap.containsKey(mod_db))
+    		{
+    			Integer value3 = DebtMap.get(mod_db);
+    			System.out.print("수정할 금액 입력>>");
+    			Integer money3= s.nextInt();
+    			DebtMap.put(mod_db, money3);
+    			System.out.println("----------수정전-----------");
+    			System.out.println("[항목]:" + mod_db + " [금액]:" + value3+"\n");
+    			System.out.println("----------수정후-----------");
+    			System.out.println("[항목]:" + mod_db + " [금액]:" + DebtMap.get(mod_db)+"\n");
+    			System.out.println("부채가 성공적으로 수정되었습니다.");
+    			break;   			
+    		}
+    		else {
+    			System.out.println("입력한 항목 "+mod_db+"이(가) 존재하지 않습니다.");
+    			this.modify();
+    		}
+    		   break;
+    		
+    	case "4" :
+    		break;
+    	default:
+    		 System.out.println("1~4 사이의 숫자를 입력해주세요.");
+    		 this.modify();
+    	
+    	}
+    	
     }
     //끝마침
     public void end() throws Exception{
