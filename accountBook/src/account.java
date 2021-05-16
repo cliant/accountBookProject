@@ -310,10 +310,8 @@ class Count{
                 else {
                 for(String i : IncomeMap.keySet()) {
                 	Integer Value = IncomeMap.get(i);
-                	System.out.println(i + Datasp_is + (Datasp_is == i));
                 	if(Datasp_is.contentEquals(i)) {
                 		Value += Datasp_ii;
-                		System.out.println(Value);
                 		IncomeMap.replace(i, Value);
                 	
                 	}
@@ -341,10 +339,8 @@ class Count{
                 else {
                 for(String i : IncomeMap.keySet()) {
                 	Integer Value = IncomeMap.get(i);
-                	System.out.println(i + Datasp_is_1 + (Datasp_is_1 == i));
                 	if(Datasp_is_1.contentEquals(i)) {
                 		Value += Datasp_ii_1;
-                		System.out.println(Value);
                 		IncomeMap.replace(i, Value);
                 	
                 	}
@@ -373,10 +369,8 @@ class Count{
                 else {
                 for(String i : IncomeMap.keySet()) {
                 	Integer Value = IncomeMap.get(i);
-                	System.out.println(i + Datasp_is_2 + (Datasp_is_2 == i));
                 	if(Datasp_is_2.contentEquals(i)) {
                 		Value += Datasp_ii_2;
-                		System.out.println(Value);
                 		IncomeMap.replace(i, Value);
                 	
                 	}
