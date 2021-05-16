@@ -218,7 +218,54 @@ class Count{
                 System.out.println(keyDebt_1+"--년이자:"+valueDebt_1*this.iyul/100*afterYear+"원");
             }
         }
+     
+/*      while(true) {
+            System.out.printf("┌──────────────────┐\n");
+            System.out.printf("│ 1. 금일 수입,지출    │\n");
+            System.out.printf("│ 2. 일별 수입,지출    │\n");
+            System.out.printf("│ 3. 월별 수입,지출    │\n");
+            System.out.printf("│ 4. 항목별 수입,지출  │\n");
+            System.out.printf("│     5. 종료       │\n");
+            System.out.printf("└──────────────────┘\n");
+            System.out.print("입력:>>");
+            Scanner b = new Scanner(System.in);
+            String choice = b.nextLine();
+            String No=choice.trim();  // 앞뒤 공백제거
+            if(No.equals("1")) todayusage();
+            else if(No.equals("2")) dailyusage();
+            else if(No.equals("3")) monthlyusage();
+            else if(No.equals("4")) items();
+            else if(No.equals("5")) break;
+            else {
+            	 System.out.println("1~5 사이의 숫자를 입력해주세요.");
+            	 	continue;
+            	 	}
+        }*/
     }
+ /*
+   public void todayusage() throws Exception {
+    	
+    	waiting();
+    }
+    public void dailyusage() throws Exception {
+    	
+    	waiting();
+    }
+    public void monthlyusage() throws Exception {
+    	
+    	waiting();
+    }
+    public void items() throws Exception {
+    	
+    	waiting();
+    }
+    public void waiting() throws Exception{
+    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    	String anykey = null;
+    	System.out.print("종료하려면 엔터를 누르세요");
+    	anykey = br.readLine();
+    }
+ */
     //불러오기
     public void load() throws Exception{
         Scanner scanner = new Scanner(System.in);
