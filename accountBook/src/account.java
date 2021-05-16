@@ -306,6 +306,22 @@ class Count{
                 String Datasp_is=new String(Datasp_i[0]);
                 Integer Datasp_ii=new Integer(Datasp_i[1]);
                 IncomeMap.put(Datasp_is,Datasp_ii);
+             /*
+                if(IncomeMap.isEmpty()) IncomeMap.put(Datasp_is,Datasp_ii);
+                else {
+                for(String i : IncomeMap.keySet()) {
+                	Integer Value = IncomeMap.get(i);
+                	System.out.println(Datasp_is == i);
+                	if(Datasp_is == i) {
+                		Value += Datasp_ii;
+                		System.out.println(Value);
+                		IncomeMap.replace(i, Value);
+                	
+                	}
+                	else IncomeMap.put(Datasp_is,Value);
+                	}
+                }
+                */
            }
         }
         frIn.close();
@@ -324,22 +340,6 @@ class Count{
                 String Datasp_is_1=new String(Datasp_i_1[0]);
                 Integer Datasp_ii_1=new Integer(Datasp_i_1[1]);
                 OutlayMap.put(Datasp_is_1,Datasp_ii_1);
-             /*
-                if(IncomeMap.isEmpty()) IncomeMap.put(Datasp_is,Datasp_ii);
-                else {
-                for(String i : IncomeMap.keySet()) {
-                	Integer Value = IncomeMap.get(i);
-                	System.out.println(Datasp_is == i);
-                	if(Datasp_is == i) {
-                		Value += Datasp_ii;
-                		System.out.println(Value);
-                		IncomeMap.replace(i, Value);
-                	
-                	}
-                	else IncomeMap.put(Datasp_is,Value);
-                	}
-                }
-                */
            }
         }
         frOut.close();
