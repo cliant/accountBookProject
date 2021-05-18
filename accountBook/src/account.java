@@ -485,7 +485,7 @@ class Count{
         while(keyIteratorIn.hasNext()){
             String keyIn=keyIteratorIn.next();
             Integer valueIn=IncomeMap.get(keyIn);
-            fwIn.write(this.today_date+":"+keyIn+":"+valueIn+"\r\n");
+            fwIn.write(keyIn+":"+valueIn+":"+this.today_date+":"+"\r\n");
         }
         fwIn.flush();
         fwIn.close();
@@ -495,7 +495,7 @@ class Count{
         while(keyIteratorOut.hasNext()){
             String keyOut=keyIteratorOut.next();
             Integer valueOut=OutlayMap.get(keyOut);
-            fwOut.write(this.today_date+":"+keyOut+":"+valueOut+"\r\n");
+            fwOut.write(keyOut+":"+valueOut+":"+this.today_date+"\r\n");
         }
         fwOut.flush();
         fwOut.close();
@@ -505,7 +505,7 @@ class Count{
         while(keyIteratorDebt.hasNext()){
             String keyDebt=keyIteratorDebt.next();
             Integer valueDebt=DebtMap.get(keyDebt);
-            fwDebt.write(this.today_date+":"+keyDebt+":"+valueDebt+"\r\n");
+            fwDebt.write(keyDebt+":"+valueDebt+":"+this.today_date+"\r\n");
         }
         fwDebt.flush();
         fwDebt.close();
