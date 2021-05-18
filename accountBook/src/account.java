@@ -468,14 +468,14 @@ class Count{
     }
     //저장하기
    public void save() throws Exception{
-        File fileIn=new File("income"+this.today_date+"주차.txt");
+        File fileIn=new File("income"+this.currDate+".txt");
         FileWriter fwIn=new FileWriter(fileIn,true);
         //추가모드
  
-        File fileOut=new File("outlay"+this.today_date+"주차.txt");
+        File fileOut=new File("outlay"+this.currDate+".txt");
         FileWriter fwOut=new FileWriter(fileOut,true);
  
-        File fileDebt=new File("debt"+this.today_date+"주차.txt");
+        File fileDebt=new File("debt"+this.currDate+".txt");
         FileWriter fwDebt=new FileWriter(fileDebt,true);
  
         System.out.println("==가계부 저장==");
