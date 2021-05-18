@@ -254,7 +254,61 @@ class Count{
     	waiting();
     }
     public void monthlyusage() throws Exception {
+    	Scanner scanner = new Scanner(System.in);
     	
+	System.out.println("==조회할 월을 입력 하시오 (ex 2021-05)==");
+	System.out.print("입력:>>");
+	String fileMonth = scanner.next();
+	
+	
+	for(int i = 1; i < 32; i++) {
+		String Date = String.format("%02d", i);
+		String fileName = "income"+ fileMonth +"-" +Date +".txt";
+		
+		if((checkFile(fileMonth+"-"+Date))){
+			
+			
+		File fileIn=new File(fileName);
+        FileReader frIn=new FileReader(fileIn);
+        
+        int readCharNo;
+        char[] cbuf=new char[SIZE];
+ 
+        while((readCharNo=frIn.read(cbuf)) != -1){
+            String iData=new String(cbuf,0,readCharNo);
+ 
+            StringTokenizer Datasp=new StringTokenizer(iData,"\r\n");
+ 
+            while(Datasp.hasMoreTokens()){ 
+                String token=Datasp.nextToken();  
+                String[] Datasp_i=token.split(":"); 
+                String Datasp_is= new String(Datasp_i[0]);
+                Integer Datasp_ii=new Integer(Datasp_i[1]);
+                
+                if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
+                else {
+                for(String a : bookMap.keySet()) {
+                	Integer Value = bookMap.get(a);
+                	if(Datasp_is.contentEquals(a)) {
+                		Value += Datasp_ii;
+                		bookMap.replace(a, Value);
+                	
+                	}
+                	else bookMap.put(Datasp_is,Value);
+                	}
+                }
+               
+           }
+        }
+        frIn.close();
+	}
+		
+	}
+	for (Entry<String, Integer> entry : bookMap.entrySet()) {
+        System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+    }
+	
+	bookMap.clear();
     	waiting();
     }
     public void items() throws Exception {
