@@ -269,55 +269,40 @@ class Count{
 	System.out.print("입력:>>");
 	String fileMonth = scanner.next();
 	
-	
+	System.out.println("====수입====");
 	for(int i = 1; i < 32; i++) {
 		String Date = String.format("%02d", i);
-		String fileName = "income"+ fileMonth +"-" +Date +".txt";
-		
-		if((checkFile(fileMonth+"-"+Date))){
-			
-			
-		File fileIn=new File(fileName);
-        FileReader frIn=new FileReader(fileIn);
-        
-        int readCharNo;
-        char[] cbuf=new char[SIZE];
- 
-        while((readCharNo=frIn.read(cbuf)) != -1){
-            String iData=new String(cbuf,0,readCharNo);
- 
-            StringTokenizer Datasp=new StringTokenizer(iData,"\r\n");
- 
-            while(Datasp.hasMoreTokens()){ 
-                String token=Datasp.nextToken();  
-                String[] Datasp_i=token.split(":"); 
-                String Datasp_is= new String(Datasp_i[0]);
-                Integer Datasp_ii=new Integer(Datasp_i[1]);
-                
-                if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
-                else {
-                for(String a : bookMap.keySet()) {
-                	Integer Value = bookMap.get(a);
-                	if(Datasp_is.contentEquals(a)) {
-                		Value += Datasp_ii;
-                		bookMap.replace(a, Value);
-                	
-                	}
-                	else bookMap.put(Datasp_is,Value);
-                	}
-                }
-               
-           }
-        }
-        frIn.close();
-	}
-		
+		String fileDate = fileMonth +"-" +Date;
+		book_IncomeFile(fileDate);
 	}
 	for (Entry<String, Integer> entry : bookMap.entrySet()) {
         System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
     }
-	
 	bookMap.clear();
+	
+	System.out.println("====지출====");
+	for(int i = 1; i < 32; i++) {
+		String Date = String.format("%02d", i);
+		String fileDate = fileMonth +"-" +Date;
+		book_OutlayFile(fileDate);
+	}
+	for (Entry<String, Integer> entry : bookMap.entrySet()) {
+        System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+    }
+	bookMap.clear();
+	
+	System.out.println("====빚====");
+	for(int i = 1; i < 32; i++) {
+		String Date = String.format("%02d", i);
+		String fileDate = fileMonth +"-" +Date;
+		book_DebtFile(fileDate);
+	}
+	for (Entry<String, Integer> entry : bookMap.entrySet()) {
+        System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+    }
+	bookMap.clear();
+	
+	
     	waiting();
     }
     public void items() throws Exception {
@@ -624,6 +609,125 @@ class Count{
     	File file = new File("income"+fileDate+".txt");
     	return file.exists();
     }
- 
+     public void book_IncomeFile(String fileDate) throws Exception {
+    	
+    	if((checkFile(fileDate))){
+			
+    		File fileIn=new File("income"+fileDate+".txt");
+            FileReader frIn=new FileReader(fileIn);
+            
+            int readCharNo;
+            char[] cbuf=new char[SIZE];
+     
+            while((readCharNo=frIn.read(cbuf)) != -1){
+                String iData=new String(cbuf,0,readCharNo);
+     
+                StringTokenizer Datasp=new StringTokenizer(iData,"\r\n");
+     
+                while(Datasp.hasMoreTokens()){ 
+                    String token=Datasp.nextToken();  
+                    String[] Datasp_i=token.split(":"); 
+                    String Datasp_is= new String(Datasp_i[0]);
+                    Integer Datasp_ii=new Integer(Datasp_i[1]);
+                    
+                    if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
+                    else {
+                    for(String a : bookMap.keySet()) {
+                    	Integer Value = bookMap.get(a);
+                    	if(Datasp_is.contentEquals(a)) {
+                    		Value += Datasp_ii;
+                    		bookMap.replace(a, Value);
+                    	
+                    	}
+                    	else bookMap.put(Datasp_is,Value);
+                    	}
+                    }
+                   
+               }
+            }
+            frIn.close();
+    	}
+    		
+
+    }
+    
+    public void book_OutlayFile(String fileDate) throws Exception {
+    	if((checkFile(fileDate))){
+			
+    		File fileOut=new File("outlay"+fileDate+".txt");
+            FileReader frOut=new FileReader(fileOut);
+            
+            int readCharNo;
+            char[] cbuf=new char[SIZE];
+     
+            while((readCharNo=frOut.read(cbuf)) != -1){
+                String iData=new String(cbuf,0,readCharNo);
+     
+                StringTokenizer Datasp=new StringTokenizer(iData,"\r\n");
+     
+                while(Datasp.hasMoreTokens()){ 
+                    String token=Datasp.nextToken();  
+                    String[] Datasp_i=token.split(":"); 
+                    String Datasp_is= new String(Datasp_i[0]);
+                    Integer Datasp_ii=new Integer(Datasp_i[1]);
+                    
+                    if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
+                    else {
+                    for(String a : bookMap.keySet()) {
+                    	Integer Value = bookMap.get(a);
+                    	if(Datasp_is.contentEquals(a)) {
+                    		Value += Datasp_ii;
+                    		bookMap.replace(a, Value);
+                    	
+                    	}
+                    	else bookMap.put(Datasp_is,Value);
+                    	}
+                    }
+                   
+               }
+            }
+            frOut.close();
+    	}
+
+    }
+    
+    public void book_DebtFile(String fileDate) throws Exception{
+    	if((checkFile(fileDate))){
+			
+    		File fileDebt=new File("debt"+fileDate+".txt");
+            FileReader frDebt=new FileReader(fileDebt);
+            
+            int readCharNo;
+            char[] cbuf=new char[SIZE];
+     
+            while((readCharNo=frDebt.read(cbuf)) != -1){
+                String iData=new String(cbuf,0,readCharNo);
+     
+                StringTokenizer Datasp=new StringTokenizer(iData,"\r\n");
+     
+                while(Datasp.hasMoreTokens()){ 
+                    String token=Datasp.nextToken();  
+                    String[] Datasp_i=token.split(":"); 
+                    String Datasp_is= new String(Datasp_i[0]);
+                    Integer Datasp_ii=new Integer(Datasp_i[1]);
+                    
+                    if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
+                    else {
+                    for(String a : bookMap.keySet()) {
+                    	Integer Value = bookMap.get(a);
+                    	if(Datasp_is.contentEquals(a)) {
+                    		Value += Datasp_ii;
+                    		bookMap.replace(a, Value);
+                    	
+                    	}
+                    	else bookMap.put(Datasp_is,Value);
+                    	}
+                    }
+                   
+               }
+            }
+            frDebt.close();
+    	}
+    }
  
 }
