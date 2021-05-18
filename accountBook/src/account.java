@@ -48,6 +48,14 @@ class Count{
     LocalDate currDate=LocalDate.now();
     //부채가 계산되는 년월
     LocalDate nextDate=LocalDate.now();
+   //현재 날짜 및 시간
+   LocalDateTime today = LocalDateTime.now();
+   //날짜 형식
+   String DatePattern ="yyyy-MM-dd-W"; // yyyy:년 mm:월 dd:일 W:주차
+   // 날짜 형식 변환
+   DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DatePattern);
+    //지정한 형식에 맞게 날짜 저장
+   String today_date = today.format(dtf);
     //옛날 날짜
     LocalDate oldDate=null;
     //파일불러올때 데이터 상수
@@ -459,14 +467,14 @@ class Count{
     }
     //저장하기
    public void save() throws Exception{
-        File fileIn=new File("income"+this.currDate+".txt");
+        File fileIn=new File("income"+this.today_date+"주차.txt");
         FileWriter fwIn=new FileWriter(fileIn,true);
         //추가모드
  
-        File fileOut=new File("outlay"+this.currDate+".txt");
+        File fileOut=new File("outlay"+this.today_date+"주차.txt");
         FileWriter fwOut=new FileWriter(fileOut,true);
  
-        File fileDebt=new File("debt"+this.currDate+".txt");
+        File fileDebt=new File("debt"+this.today_date+"주차.txt");
         FileWriter fwDebt=new FileWriter(fileDebt,true);
  
         System.out.println("==가계부 저장==");
@@ -476,7 +484,7 @@ class Count{
         while(keyIteratorIn.hasNext()){
             String keyIn=keyIteratorIn.next();
             Integer valueIn=IncomeMap.get(keyIn);
-            fwIn.write(keyIn+":"+valueIn+"\r\n");
+            fwIn.write(this.today_date+":"+keyIn+":"+valueIn+"\r\n");
         }
         fwIn.flush();
         fwIn.close();
@@ -486,7 +494,7 @@ class Count{
         while(keyIteratorOut.hasNext()){
             String keyOut=keyIteratorOut.next();
             Integer valueOut=OutlayMap.get(keyOut);
-            fwOut.write(keyOut+":"+valueOut+"\r\n");
+            fwOut.write(this.today_date+":"+keyOut+":"+valueOut+"\r\n");
         }
         fwOut.flush();
         fwOut.close();
@@ -496,7 +504,7 @@ class Count{
         while(keyIteratorDebt.hasNext()){
             String keyDebt=keyIteratorDebt.next();
             Integer valueDebt=DebtMap.get(keyDebt);
-            fwDebt.write(keyDebt+":"+valueDebt+":"+this.currDate+"\r\n");
+            fwDebt.write(this.today_date+":"+keyDebt+":"+valueDebt+"\r\n");
         }
         fwDebt.flush();
         fwDebt.close();
