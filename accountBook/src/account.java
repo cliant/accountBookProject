@@ -644,7 +644,7 @@ public void waiting() throws Exception{
                     	Integer Value = bookMap.get(a);
                     	if(Datasp_is.contentEquals(a)) {
                     		Value += Datasp_ii;
-                    		bookMap.replace(a, Value);
+                    		Replace(bookMap, a, Value);
                     	
                     	}
                     	else bookMap.put(Datasp_is,Value);
@@ -685,7 +685,7 @@ public void waiting() throws Exception{
                     	Integer Value = bookMap.get(a);
                     	if(Datasp_is.contentEquals(a)) {
                     		Value += Datasp_ii;
-                    		bookMap.replace(a, Value);
+                    		Replace(bookMap, a, Value);
                     	
                     	}
                     	else bookMap.put(Datasp_is,Value);
@@ -698,5 +698,7 @@ public void waiting() throws Exception{
     	}
 
     }
- 
+  public void Replace(TreeMap a,String Key, Integer Value) {
+	 a.replace(Key, Value);
+ }
 }
