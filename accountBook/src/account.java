@@ -39,10 +39,7 @@ class Count{
     //지출 트리
     TreeMap<String,Integer> bookMap=new TreeMap<String,Integer>();
  
-    //부채 이자 변수
-    int ija;
-    //부채 이율 변수
-    int iyul;
+   
     //부채받은년월
     LocalDate currDate=LocalDate.now();
     //부채가 계산되는 년월
@@ -619,7 +616,6 @@ public void waiting() throws Exception{
     public void mout() throws Exception{
         IncomeMap.clear();
         OutlayMap.clear();
-        DebtMap.clear();
  
         this.oldDate=null;
  
