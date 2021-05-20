@@ -40,6 +40,7 @@ class Count{
     //지출 트리
     TreeMap<String,Integer> DebtMap=new TreeMap<String,Integer>();
     //부채 트리
+    TreeMap<String,Integer> bookMap=new TreeMap<String,Integer>();
  
     //부채 이자 변수
     int ija;
