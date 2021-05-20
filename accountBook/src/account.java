@@ -647,7 +647,7 @@ public void waiting() throws Exception{
                     		Replace(bookMap, a, Value);
                     	
                     	}
-                    	else bookMap.put(Datasp_is,Value);
+                    	else bookMap.put(Datasp_is,Datasp_ii);
                     	}
                     }
                    
@@ -688,7 +688,7 @@ public void waiting() throws Exception{
                     		Replace(bookMap, a, Value);
                     	
                     	}
-                    	else bookMap.put(Datasp_is,Value);
+                    	else bookMap.put(Datasp_is,Datasp_ii);
                     	}
                     }
                    
