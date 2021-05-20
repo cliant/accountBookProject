@@ -18,15 +18,14 @@ public class account{
             String No=choice.trim();  // 앞뒤 공백제거
             if(No.equals("1")) count.income();
             else if(No.equals("2")) count.outlay();
-            else if(No.equals("3")) count.debt();
-            else if(No.equals("4")) count.book();
-            else if(No.equals("5")) count.load();
-            else if(No.equals("6")) count.save();
-            else if(No.equals("7")) count.mout();
-            else if(No.equals("8")) count.modify();
-            else if(No.equals("9")) count.end();
+            else if(No.equals("3")) count.book();
+            else if(No.equals("4")) count.load();
+            else if(No.equals("5")) count.save();
+            else if(No.equals("6")) count.mout();
+            else if(No.equals("7")) count.modify();
+            else if(No.equals("8")) count.end();
             else {
-            	 System.out.println("1~9 사이의 숫자를 입력해주세요.");
+            	 System.out.println("1~8 사이의 숫자를 입력해주세요.");
             	 	continue;
             	 	}
         }
@@ -38,8 +37,6 @@ class Count{
     //수입 트리
     TreeMap<String,Integer> OutlayMap=new TreeMap<String,Integer>();
     //지출 트리
-    TreeMap<String,Integer> DebtMap=new TreeMap<String,Integer>();
-    //부채 트리
     TreeMap<String,Integer> bookMap=new TreeMap<String,Integer>();
  
     //부채 이자 변수
@@ -67,13 +64,12 @@ class Count{
         System.out.printf("┌──────────────────┐\n");
         System.out.printf("│           1. 수입 입력             │\n");
         System.out.printf("│           2. 지출 입력             │\n");
-        System.out.printf("│           3. 부채 입력             │\n");
-        System.out.printf("│           4. 장부 보기             │\n");
-        System.out.printf("│           5. 불러 오기             │\n");
-        System.out.printf("│           6. 저장 하기             │\n");
-        System.out.printf("│           7. 메모리해제            │\n");
-        System.out.printf("│           8. 수정 하기             │\n");
-        System.out.printf("│           9. 종     료             │\n");
+        System.out.printf("│           3. 장부 보기             │\n");
+        System.out.printf("│           4. 불러 오기             │\n");
+        System.out.printf("│           5. 저장 하기             │\n");
+        System.out.printf("│           6. 메모리해제            │\n");
+        System.out.printf("│           7. 수정 하기             │\n");
+        System.out.printf("│           8. 종     료             │\n");
         System.out.printf("└──────────────────┘\n");
         System.out.print("입력:>>");
  
@@ -591,8 +587,6 @@ public void waiting() throws Exception{
         File fileOut=new File("outlay"+this.currDate+".txt");
         FileWriter fwOut=new FileWriter(fileOut,true);
  
-        File fileDebt=new File("debt"+this.currDate+".txt");
-        FileWriter fwDebt=new FileWriter(fileDebt,true);
  
         System.out.println("==가계부 저장==");
  
@@ -616,15 +610,7 @@ public void waiting() throws Exception{
         fwOut.flush();
         fwOut.close();
  
-        Set<String> keySetDebt=DebtMap.keySet();
-        Iterator<String> keyIteratorDebt=keySetDebt.iterator();
-        while(keyIteratorDebt.hasNext()){
-            String keyDebt=keyIteratorDebt.next();
-            Integer valueDebt=DebtMap.get(keyDebt);
-            fwDebt.write(keyDebt+":"+valueDebt+":"+this.today_date+"\r\n");
-        }
-        fwDebt.flush();
-        fwDebt.close();
+       
  
         System.out.println("저장되었습니다.");
     }
@@ -645,8 +631,7 @@ public void waiting() throws Exception{
     	   System.out.printf("┌──────────────────┐\n");
         System.out.printf("│           1. 수입 수정             │\n");
         System.out.printf("│           2. 지출 수정             │\n");
-        System.out.printf("│           3. 부채 수정             │\n");
-        System.out.printf("│           4. 메뉴로 가기             │\n");
+        System.out.printf("│           3. 메뉴로 가기             │\n");
         System.out.printf("└──────────────────┘\n");
         System.out.print("입력:>>");
     	String choice = s.nextLine();
@@ -699,33 +684,12 @@ public void waiting() throws Exception{
     			this.modify();
     		}
     		   break;
-    	case "3" :
-    		System.out.print("수정할 항목 입력>>");
-    		String mod3= s.nextLine();
-    		String mod_db= mod3.trim();
-    		if(DebtMap.containsKey(mod_db))
-    		{
-    			Integer value3 = DebtMap.get(mod_db);
-    			System.out.print("수정할 금액 입력>>");
-    			Integer money3= s.nextInt();
-    			DebtMap.put(mod_db, money3);
-    			System.out.println("----------수정전-----------");
-    			System.out.println("[항목]:" + mod_db + " [금액]:" + value3+"\n");
-    			System.out.println("----------수정후-----------");
-    			System.out.println("[항목]:" + mod_db + " [금액]:" + DebtMap.get(mod_db)+"\n");
-    			System.out.println("부채가 성공적으로 수정되었습니다.");
-    			break;   			
-    		}
-    		else {
-    			System.out.println("입력한 항목 "+mod_db+"이(가) 존재하지 않습니다.");
-    			this.modify();
-    		}
-    		   break;
+    
     		
-    	case "4" :
+    	case "3" :
     		break;
     	default:
-    		 System.out.println("1~4 사이의 숫자를 입력해주세요.");
+    		 System.out.println("1~3 사이의 숫자를 입력해주세요.");
     		 this.modify();
     	
     	}
