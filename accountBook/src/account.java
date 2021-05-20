@@ -566,11 +566,7 @@ public void waiting() throws Exception{
             System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
         }
         
-        System.out.println("부채 목록");
-        for (Entry<String, Integer> entry : DebtMap.entrySet()) {
-            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
-        }
-        }
+        
         else {
         	System.out.println("파일이 없습니다.");
         }
