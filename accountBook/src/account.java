@@ -172,99 +172,219 @@ class Count{
     }
     //장부
     public void book() throws Exception{
-        Scanner scanner=new Scanner(System.in);
- 
-        System.out.println("==가계부 장부 보기==");
- 
-        System.out.println("수입내역:");
- 
-        Set<String> keySetIn=IncomeMap.keySet();
-        Iterator<String> keyIteratorIn=keySetIn.iterator();
-        while(keyIteratorIn.hasNext()){
-            String keyIn=keyIteratorIn.next();
-            Integer valueIn=IncomeMap.get(keyIn);
-            System.out.println(keyIn+"\t"+valueIn+"원");
+       while(true) {
+        System.out.printf("┌──────────────────┐\n");
+        System.out.printf("│ 1. 금일 수입,지출    │\n");
+        System.out.printf("│ 2. 주차별 수입,지출    │\n");
+        System.out.printf("│ 3. 월별 수입,지출    │\n");
+        System.out.printf("│ 4. 항목별 수입,지출  │\n");
+        System.out.printf("│     5. 종료       │\n");
+        System.out.printf("└──────────────────┘\n");
+        System.out.print("입력:>>");
+        Scanner b = new Scanner(System.in);
+        String choice = b.nextLine();
+        String No=choice.trim();  // 앞뒤 공백제거
+        if(No.equals("1")) dailyusage();
+        else if(No.equals("2")) weekusage();
+        else if(No.equals("3")) monthlyusage();
+        else if(No.equals("4")) items();
+        else if(No.equals("5")) break;
+        else {
+        	 System.out.println("1~5 사이의 숫자를 입력해주세요.");
+        	 	continue;
+        	 	}
         }
-        System.out.println("===================");
- 
-        System.out.println("지출내역:");
- 
-        Set<String> keySetOut=OutlayMap.keySet();
-        Iterator<String> keyIteratorOut=keySetOut.iterator();
-        while(keyIteratorOut.hasNext()){
-            String keyOut=keyIteratorOut.next();
-            Integer valueOut=OutlayMap.get(keyOut);
-            System.out.println(keyOut+"\t"+valueOut+"원");
-        }
-        System.out.println("===================");
- 
-        System.out.println("부채내역:");
- 
-        Set<String> keySetDebt=DebtMap.keySet();
-        Iterator<String> keyIteratorDebt=keySetDebt.iterator();
-        while(keyIteratorDebt.hasNext()){
-            String keyDebt=keyIteratorDebt.next();
-            Integer valueDebt=DebtMap.get(keyDebt);
-            System.out.println(keyDebt+"\t"+valueDebt+"원");
-        }
-        System.out.println("===================");
- 
-        System.out.println("부채이자내역서:");
- 
-        if(this.oldDate!=null){
-            this.currDate=this.oldDate;
-        }
- 
-        long afterYear=ChronoUnit.YEARS.between(this.currDate,this.nextDate);
-        long afterMonth=ChronoUnit.MONTHS.between(this.currDate,this.nextDate);
- 
-        Set<String> keySetDebt_1=DebtMap.keySet();
-        Iterator<String> keyIteratorDebt_1=keySetDebt_1.iterator();
-        while(keyIteratorDebt_1.hasNext()){
-            String keyDebt_1=keyIteratorDebt_1.next();
-            Integer valueDebt_1=DebtMap.get(keyDebt_1);
-            if(this.ija==0){
-                System.out.println(keyDebt_1+"--월이자:"+valueDebt_1*this.iyul/100*afterMonth+"원");
-            }
-            else if(this.ija==1){
-                System.out.println(keyDebt_1+"--년이자:"+valueDebt_1*this.iyul/100*afterYear+"원");
-            }
-        }
-     
-/*      while(true) {
-            System.out.printf("┌──────────────────┐\n");
-            System.out.printf("│ 1. 금일 수입,지출    │\n");
-            System.out.printf("│ 2. 일별 수입,지출    │\n");
-            System.out.printf("│ 3. 월별 수입,지출    │\n");
-            System.out.printf("│ 4. 항목별 수입,지출  │\n");
-            System.out.printf("│     5. 종료       │\n");
-            System.out.printf("└──────────────────┘\n");
-            System.out.print("입력:>>");
-            Scanner b = new Scanner(System.in);
-            String choice = b.nextLine();
-            String No=choice.trim();  // 앞뒤 공백제거
-            if(No.equals("1")) todayusage();
-            else if(No.equals("2")) dailyusage();
-            else if(No.equals("3")) monthlyusage();
-            else if(No.equals("4")) items();
-            else if(No.equals("5")) break;
-            else {
-            	 System.out.println("1~5 사이의 숫자를 입력해주세요.");
-            	 	continue;
-            	 	}
-        }*/
-    }
- /*
-   public void todayusage() throws Exception {
-    	
-    	waiting();
-    }
+}
     public void dailyusage() throws Exception {
     	
-    	waiting();
-    }
-    public void monthlyusage() throws Exception {
     	Scanner scanner = new Scanner(System.in);
+    	System.out.println("==조회할 일을 입력 하시오 (ex 2021-05-20)==");
+    	System.out.println("입력:>>");
+    	String fileDate = scanner.next();
+    	
+    	System.out.println("====수입====");
+    	book_IncomeFile(fileDate);
+    	bookMap.clear();
+    	
+    	System.out.println("====지출====");
+    	book_OutlayFile(fileDate);
+    	bookMap.clear();
+    	
+    	System.out.println("====빚====");
+    	book_DebtFile(fileDate);
+    	bookMap.clear();
+	
+	waiting();
+    }
+    
+    public void weekusage() throws Exception{
+    	Scanner scanner = new Scanner(System.in);
+    	System.out.println("==조회할 월을 입력 하시오 (ex 2021-05)==");
+    	System.out.print("입력:>>");
+    	String fileMonth = scanner.next();
+    	
+    	System.out.println("==조회할 주차를 입력하시오");
+    	System.out.println("입력:>>");
+    	Integer Week = scanner.nextInt();
+    	
+    	
+    	for(int i = 1; i < 32; i++) {
+    		String Date = String.format("%02d", i);
+    		String fileDate = fileMonth +"-" +Date;
+
+    		if((checkFile(fileDate))){
+    		File fileIn=new File("income"+fileDate+".txt");
+            FileReader frIn=new FileReader(fileIn);
+            
+            int readCharNo;
+            char[] cbuf=new char[SIZE];
+     
+            while((readCharNo=frIn.read(cbuf)) != -1){
+                String iData=new String(cbuf,0,readCharNo);
+     
+                StringTokenizer Datasp=new StringTokenizer(iData,"\r\n");
+     
+                while(Datasp.hasMoreTokens()){ 
+                    String token=Datasp.nextToken();  
+                    String[] Datasp_i=token.split(":"); 
+                    String Datasp_is= new String(Datasp_i[0]);
+                    Integer Datasp_ii=new Integer(Datasp_i[1]);
+                    
+                   
+                    String[] Datasp_i_2=Datasp_i[2].split("-");
+                    Integer Datasp_week = new Integer(Datasp_i_2[3]);
+                    
+                    if(Datasp_week.equals(Week)) {
+                    if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
+                    else {
+                    for(String a : bookMap.keySet()) {
+                    	Integer Value = bookMap.get(a);
+                    	if(Datasp_is.contentEquals(a)) {
+                    		Value += Datasp_ii;
+                    		bookMap.replace(a, Value);
+                    	
+                    	}
+                    	else bookMap.put(Datasp_is,Value);
+                    	}
+                    }
+                    }
+               }
+            }
+            frIn.close();
+    	}
+    	}
+    	for (Entry<String, Integer> entry : bookMap.entrySet()) {
+            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+        }
+    	bookMap.clear();
+    	
+    	for(int i = 1; i < 32; i++) {
+    		String Date = String.format("%02d", i);
+    		String fileDate = fileMonth +"-" +Date;
+
+    		if((checkFile(fileDate))){
+    		File fileOut=new File("outlay"+fileDate+".txt");
+            FileReader frOut=new FileReader(fileOut);
+            
+            int readCharNo;
+            char[] cbuf=new char[SIZE];
+     
+            while((readCharNo=frOut.read(cbuf)) != -1){
+                String iData=new String(cbuf,0,readCharNo);
+     
+                StringTokenizer Datasp=new StringTokenizer(iData,"\r\n");
+     
+                while(Datasp.hasMoreTokens()){ 
+                    String token=Datasp.nextToken();  
+                    String[] Datasp_i=token.split(":"); 
+                    String Datasp_is= new String(Datasp_i[0]);
+                    Integer Datasp_ii=new Integer(Datasp_i[1]);
+                    
+                   
+                    String[] Datasp_i_2=Datasp_i[2].split("-");
+                    Integer Datasp_week = new Integer(Datasp_i_2[3]);
+                    
+                    if(Datasp_week.equals(Week)) {
+                    if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
+                    else {
+                    for(String a : bookMap.keySet()) {
+                    	Integer Value = bookMap.get(a);
+                    	if(Datasp_is.contentEquals(a)) {
+                    		Value += Datasp_ii;
+                    		bookMap.replace(a, Value);
+                    	
+                    	}
+                    	else bookMap.put(Datasp_is,Value);
+                    	}
+                    }
+                    }
+               }
+            }
+            frOut.close();
+    	}
+    	}
+    	for (Entry<String, Integer> entry : bookMap.entrySet()) {
+            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+        }
+    	bookMap.clear();
+    	
+    	for(int i = 1; i < 32; i++) {
+    		String Date = String.format("%02d", i);
+    		String fileDate = fileMonth +"-" +Date;
+
+    		if((checkFile(fileDate))){
+    		File fileDebt=new File("income"+fileDate+".txt");
+            FileReader frDebt=new FileReader(fileDebt);
+            
+            int readCharNo;
+            char[] cbuf=new char[SIZE];
+     
+            while((readCharNo=frDebt.read(cbuf)) != -1){
+                String iData=new String(cbuf,0,readCharNo);
+     
+                StringTokenizer Datasp=new StringTokenizer(iData,"\r\n");
+     
+                while(Datasp.hasMoreTokens()){ 
+                    String token=Datasp.nextToken();  
+                    String[] Datasp_i=token.split(":"); 
+                    String Datasp_is= new String(Datasp_i[0]);
+                    Integer Datasp_ii=new Integer(Datasp_i[1]);
+                    
+                   
+                    String[] Datasp_i_2=Datasp_i[2].split("-");
+                    Integer Datasp_week = new Integer(Datasp_i_2[3]);
+                    
+                    if(Datasp_week.equals(Week)) {
+                    if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
+                    else {
+                    for(String a : bookMap.keySet()) {
+                    	Integer Value = bookMap.get(a);
+                    	if(Datasp_is.contentEquals(a)) {
+                    		Value += Datasp_ii;
+                    		bookMap.replace(a, Value);
+                    	
+                    	}
+                    	else bookMap.put(Datasp_is,Value);
+                    	}
+                    }
+                    }
+               }
+            }
+            frDebt.close();
+    	}
+    	}
+    	for (Entry<String, Integer> entry : bookMap.entrySet()) {
+            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+        }
+    	bookMap.clear();
+    		
+    	waiting();
+    	}
+    	
+ 
+    public void monthlyusage() throws Exception {
+    	
+    Scanner scanner = new Scanner(System.in);
     	
 	System.out.println("==조회할 월을 입력 하시오 (ex 2021-05)==");
 	System.out.print("입력:>>");
@@ -304,19 +424,10 @@ class Count{
 	bookMap.clear();
 	
 	
-    	waiting();
-    }
-    public void items() throws Exception {
-    	
-    	waiting();
-    }
-    public void waiting() throws Exception{
-    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    	String anykey = null;
-    	System.out.print("종료하려면 엔터를 누르세요");
-    	anykey = br.readLine();
-    }
- */
+	waiting();
+}
+public void items() throws Exception {
+}
     //불러오기
     public void load() throws Exception{
         Scanner scanner = new Scanner(System.in);
