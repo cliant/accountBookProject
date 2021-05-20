@@ -370,7 +370,7 @@ class Count{
     		String fileDate = fileMonth +"-" +Date;
 
     		if((checkFile(fileDate))){
-    		File fileDebt=new File("income"+fileDate+".txt");
+    		File fileDebt=new File("debt"+fileDate+".txt");
             FileReader frDebt=new FileReader(fileDebt);
             
             int readCharNo;
