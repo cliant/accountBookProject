@@ -125,51 +125,7 @@ class Count{
         else OutlayMap.put(rm_blank,outmonstr);
         System.out.println("지출되었습니다.");
     }
-    //부채
-    public void debt() throws Exception{
-        Scanner scanner=new Scanner(System.in);
- 
-        System.out.println("==가계부 부채 입력==");
-        System.out.print("부채항목입력:>>");
-        String destr=scanner.nextLine();
- 
-        System.out.print("부채돈입력:>>");
-        Integer demonstr=scanner.nextInt();
- 
-        while(true){
-            System.out.println("0=월이자 1=년이자");
-            System.out.print("입력:>>");
-            this.ija=scanner.nextInt();
- 
-            if(this.ija<0 || this.ija>1){
-                System.out.println("잘못입력하셨습니다.");
-                continue;
-            }
-            break;
-        }
- 
-        while(true){
-            System.out.print("이율(퍼센트)입력>>");
-            this.iyul=scanner.nextInt();
- 
-            if(this.iyul<0){
-                System.out.println("잘못입력하셨습니다.");
-                continue;
-            }
-            break;
-        } 
- 
-        System.out.println("==이자계산==");
-        System.out.println("현재날짜:"+this.currDate);
- 
-        if(this.ija==0)
-            System.out.println("월이자--"+this.iyul*demonstr/100+"원 입니다.");
-        else if(this.ija==1)
-            System.out.println("년이자--"+this.iyul*demonstr/100+"원 입니다.");
- 
-        DebtMap.put(destr,demonstr);
-        System.out.println("부채되었습니다.");
-    }
+   
     //장부
    public void book() throws Exception{
        
