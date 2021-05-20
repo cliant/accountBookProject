@@ -416,7 +416,8 @@ class Count{
         }
 		System.out.println("===빚 총합===");
 		System.out.println(Total_debt);
-    		System.out.println();
+		System.out.println();
+    		bookMap.clear();
     	waiting();
     	}
     
