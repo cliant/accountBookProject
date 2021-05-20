@@ -171,14 +171,14 @@ class Count{
         System.out.println("부채되었습니다.");
     }
     //장부
-    public void book() throws Exception{
-       while(true) {
+   public void book() throws Exception{
+       
+        while(true) {
         System.out.printf("┌──────────────────┐\n");
         System.out.printf("│ 1. 금일 수입,지출    │\n");
         System.out.printf("│ 2. 주차별 수입,지출    │\n");
         System.out.printf("│ 3. 월별 수입,지출    │\n");
-        System.out.printf("│ 4. 항목별 수입,지출  │\n");
-        System.out.printf("│     5. 종료       │\n");
+        System.out.printf("│ 4. 종료  │\n");
         System.out.printf("└──────────────────┘\n");
         System.out.print("입력:>>");
         Scanner b = new Scanner(System.in);
@@ -187,38 +187,64 @@ class Count{
         if(No.equals("1")) dailyusage();
         else if(No.equals("2")) weekusage();
         else if(No.equals("3")) monthlyusage();
-        else if(No.equals("4")) items();
-        else if(No.equals("5")) break;
+        else if(No.equals("4")) break;
         else {
-        	 System.out.println("1~5 사이의 숫자를 입력해주세요.");
+        	 System.out.println("1~4 사이의 숫자를 입력해주세요.");
         	 	continue;
         	 	}
         }
 }
-    public void dailyusage() throws Exception {
-    	
-    	Scanner scanner = new Scanner(System.in);
-    	System.out.println("==조회할 일을 입력 하시오 (ex 2021-05-20)==");
-    	System.out.println("입력:>>");
-    	String fileDate = scanner.next();
-    	
-    	System.out.println("====수입====");
-    	book_IncomeFile(fileDate);
-    	bookMap.clear();
-    	
-    	System.out.println("====지출====");
-    	book_OutlayFile(fileDate);
-    	bookMap.clear();
-    	
-    	System.out.println("====빚====");
-    	book_DebtFile(fileDate);
-    	bookMap.clear();
+   public void dailyusage() throws Exception {
+		
+		Scanner scanner = new Scanner(System.in);
+		Integer Total_income = 0;
+		Integer Total_outlay = 0;
+		Integer Total_debt = 0;
+		
+		System.out.println("==조회할 일을 입력 하시오 (ex 2021-05-20)==");
+		System.out.println("입력:>>");
+		String fileDate = scanner.next();
+		
+		System.out.println("====수입====");
+		book_IncomeFile(fileDate);
+		
+		for (Entry<String, Integer> entry : bookMap.entrySet()) {
+            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+            Total_income += entry.getValue();
+        }
+		System.out.println("===수입 총합===");
+		System.out.println(Total_income);
+		bookMap.clear();
+		
+		System.out.println("====지출====");
+		book_OutlayFile(fileDate);
+		for (Entry<String, Integer> entry : bookMap.entrySet()) {
+            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+            Total_outlay += entry.getValue();
+        }
+		System.out.println("===지출 총합===");
+		System.out.println(Total_outlay);
+		bookMap.clear();
+		
+		System.out.println("====빚====");
+		book_DebtFile(fileDate);
+		for (Entry<String, Integer> entry : bookMap.entrySet()) {
+            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+            Total_debt += entry.getValue();
+        }
+		System.out.println("===빚 총합===");
+		System.out.println(Total_debt);
+		bookMap.clear();
 	
 	waiting();
-    }
-    
-    public void weekusage() throws Exception{
+	}
+	public void weekusage() throws Exception{
+		
     	Scanner scanner = new Scanner(System.in);
+    	Integer Total_income = 0;
+		Integer Total_outlay = 0;
+		Integer Total_debt = 0;
+		
     	System.out.println("==조회할 월을 입력 하시오 (ex 2021-05)==");
     	System.out.print("입력:>>");
     	String fileMonth = scanner.next();
@@ -275,7 +301,10 @@ class Count{
     	}
     	for (Entry<String, Integer> entry : bookMap.entrySet()) {
             System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+            Total_income += entry.getValue();
         }
+		System.out.println("===수입 총합===");
+		System.out.println(Total_income);
     	bookMap.clear();
     	
     	for(int i = 1; i < 32; i++) {
@@ -325,7 +354,10 @@ class Count{
     	}
     	for (Entry<String, Integer> entry : bookMap.entrySet()) {
             System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+            Total_outlay += entry.getValue();
         }
+		System.out.println("===지출 총합===");
+		System.out.println(Total_outlay);
     	bookMap.clear();
     	
     	for(int i = 1; i < 32; i++) {
@@ -375,16 +407,23 @@ class Count{
     	}
     	for (Entry<String, Integer> entry : bookMap.entrySet()) {
             System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+            Total_debt += entry.getValue();
         }
-    	bookMap.clear();
+		System.out.println("===빚 총합===");
+		System.out.println(Total_debt);
     		
     	waiting();
     	}
+    
     	
  
     public void monthlyusage() throws Exception {
     	
     Scanner scanner = new Scanner(System.in);
+    Integer Total_income = 0;
+	Integer Total_outlay = 0;
+	Integer Total_debt = 0;
+	
     	
 	System.out.println("==조회할 월을 입력 하시오 (ex 2021-05)==");
 	System.out.print("입력:>>");
@@ -398,7 +437,10 @@ class Count{
 	}
 	for (Entry<String, Integer> entry : bookMap.entrySet()) {
         System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+        Total_income += entry.getValue();
     }
+	System.out.println("===수입 총합===");
+	System.out.println(Total_income);
 	bookMap.clear();
 	
 	System.out.println("====지출====");
@@ -409,7 +451,10 @@ class Count{
 	}
 	for (Entry<String, Integer> entry : bookMap.entrySet()) {
         System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+        Total_outlay += entry.getValue();
     }
+	System.out.println("===지출 총합===");
+	System.out.println(Total_outlay);
 	bookMap.clear();
 	
 	System.out.println("====빚====");
@@ -420,14 +465,23 @@ class Count{
 	}
 	for (Entry<String, Integer> entry : bookMap.entrySet()) {
         System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
+        Total_debt += entry.getValue();
     }
+	System.out.println("===빚 총합===");
+	System.out.println(Total_debt);
 	bookMap.clear();
 	
 	
 	waiting();
 }
-public void items() throws Exception {
+    
+public void waiting() throws Exception{
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	String anykey = null;
+	System.out.print("종료하려면 엔터를 누르세요");
+	anykey = br.readLine();
 }
+
     //불러오기
     public void load() throws Exception{
         Scanner scanner = new Scanner(System.in);
