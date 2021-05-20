@@ -566,7 +566,7 @@ public void waiting() throws Exception{
             System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
         }
         
-        
+	}
         else {
         	System.out.println("파일이 없습니다.");
         }
