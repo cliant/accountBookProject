@@ -177,16 +177,6 @@ class Count{
 	        System.out.println();
 		bookMap.clear();
 		
-		System.out.println("====빚====");
-		book_DebtFile(fileDate);
-		for (Entry<String, Integer> entry : bookMap.entrySet()) {
-            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
-            Total_debt += entry.getValue();
-        }
-		System.out.println("===빚 총합===");
-		System.out.println(Total_debt);
-	        System.out.println();
-		bookMap.clear();
 	
 	waiting();
 	}
@@ -313,60 +303,6 @@ class Count{
 		System.out.println(Total_outlay);
 		System.out.println();
     	bookMap.clear();
-    	
-    	for(int i = 1; i < 32; i++) {
-    		String Date = String.format("%02d", i);
-    		String fileDate = fileMonth +"-" +Date;
-
-    		if((checkFile(fileDate))){
-    		File fileDebt=new File("debt"+fileDate+".txt");
-            FileReader frDebt=new FileReader(fileDebt);
-            
-            int readCharNo;
-            char[] cbuf=new char[SIZE];
-     
-            while((readCharNo=frDebt.read(cbuf)) != -1){
-                String iData=new String(cbuf,0,readCharNo);
-     
-                StringTokenizer Datasp=new StringTokenizer(iData,"\r\n");
-     
-                while(Datasp.hasMoreTokens()){ 
-                    String token=Datasp.nextToken();  
-                    String[] Datasp_i=token.split(":"); 
-                    String Datasp_is= new String(Datasp_i[0]);
-                    Integer Datasp_ii=new Integer(Datasp_i[1]);
-                    
-                   
-                    String[] Datasp_i_2=Datasp_i[2].split("-");
-                    Integer Datasp_week = new Integer(Datasp_i_2[3]);
-                    
-                    if(Datasp_week.equals(Week)) {
-                    if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
-                    else {
-                    for(String a : bookMap.keySet()) {
-                    	Integer Value = bookMap.get(a);
-                    	if(Datasp_is.contentEquals(a)) {
-                    		Value += Datasp_ii;
-                    		bookMap.replace(a, Value);
-                    	
-                    	}
-                    	else bookMap.put(Datasp_is,Value);
-                    	}
-                    }
-                    }
-               }
-            }
-            frDebt.close();
-    	}
-    	}
-    	for (Entry<String, Integer> entry : bookMap.entrySet()) {
-            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
-            Total_debt += entry.getValue();
-        }
-		System.out.println("===빚 총합===");
-		System.out.println(Total_debt);
-		System.out.println();
-    		bookMap.clear();
     	waiting();
     	}
     
@@ -411,21 +347,6 @@ class Count{
     }
 	System.out.println("===지출 총합===");
 	System.out.println(Total_outlay);
-	    System.out.println();
-	bookMap.clear();
-	
-	System.out.println("====빚====");
-	for(int i = 1; i < 32; i++) {
-		String Date = String.format("%02d", i);
-		String fileDate = fileMonth +"-" +Date;
-		book_DebtFile(fileDate);
-	}
-	for (Entry<String, Integer> entry : bookMap.entrySet()) {
-        System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
-        Total_debt += entry.getValue();
-    }
-	System.out.println("===빚 총합===");
-	System.out.println(Total_debt);
 	    System.out.println();
 	bookMap.clear();
 	
@@ -776,45 +697,6 @@ public void waiting() throws Exception{
             frOut.close();
     	}
 
-    }
-    
-    public void book_DebtFile(String fileDate) throws Exception{
-    	if((checkFile(fileDate))){
-			
-    		File fileDebt=new File("debt"+fileDate+".txt");
-            FileReader frDebt=new FileReader(fileDebt);
-            
-            int readCharNo;
-            char[] cbuf=new char[SIZE];
-     
-            while((readCharNo=frDebt.read(cbuf)) != -1){
-                String iData=new String(cbuf,0,readCharNo);
-     
-                StringTokenizer Datasp=new StringTokenizer(iData,"\r\n");
-     
-                while(Datasp.hasMoreTokens()){ 
-                    String token=Datasp.nextToken();  
-                    String[] Datasp_i=token.split(":"); 
-                    String Datasp_is= new String(Datasp_i[0]);
-                    Integer Datasp_ii=new Integer(Datasp_i[1]);
-                    
-                    if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
-                    else {
-                    for(String a : bookMap.keySet()) {
-                    	Integer Value = bookMap.get(a);
-                    	if(Datasp_is.contentEquals(a)) {
-                    		Value += Datasp_ii;
-                    		bookMap.replace(a, Value);
-                    	
-                    	}
-                    	else bookMap.put(Datasp_is,Value);
-                    	}
-                    }
-                   
-               }
-            }
-            frDebt.close();
-    	}
     }
  
 }
