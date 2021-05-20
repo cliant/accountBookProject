@@ -471,7 +471,7 @@ class Count{
         while(keyIteratorIn.hasNext()){
             String keyIn=keyIteratorIn.next();
             Integer valueIn=IncomeMap.get(keyIn);
-            fwIn.write(keyIn+":"+valueIn+":"+this.today_date+":"+"\r\n");
+            fwIn.write(keyIn+":"+valueIn+":"+this.today_date+"\r\n");
         }
         fwIn.flush();
         fwIn.close();
