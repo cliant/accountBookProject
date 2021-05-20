@@ -174,12 +174,12 @@ class Count{
    public void book() throws Exception{
        
         while(true) {
-        System.out.printf("┌──────────────────┐\n");
-        System.out.printf("│ 1. 금일 수입,지출    │\n");
-        System.out.printf("│ 2. 주차별 수입,지출    │\n");
-        System.out.printf("│ 3. 월별 수입,지출    │\n");
-        System.out.printf("│ 4. 종료  │\n");
-        System.out.printf("└──────────────────┘\n");
+        System.out.printf("┌────────────────────┐\n");
+        System.out.printf("│  1. 금일 수입,지출  │\n");
+        System.out.printf("│  2. 주차별 수입,지출│\n");
+        System.out.printf("│  3. 월별 수입,지출  │\n");
+        System.out.printf("│  4. 종료           │\n");
+        System.out.printf("└────────────────────┘\n");
         System.out.print("입력:>>");
         Scanner b = new Scanner(System.in);
         String choice = b.nextLine();
@@ -214,6 +214,7 @@ class Count{
         }
 		System.out.println("===수입 총합===");
 		System.out.println(Total_income);
+	   	System.out.println();
 		bookMap.clear();
 		
 		System.out.println("====지출====");
@@ -224,6 +225,7 @@ class Count{
         }
 		System.out.println("===지출 총합===");
 		System.out.println(Total_outlay);
+	        System.out.println();
 		bookMap.clear();
 		
 		System.out.println("====빚====");
@@ -234,6 +236,7 @@ class Count{
         }
 		System.out.println("===빚 총합===");
 		System.out.println(Total_debt);
+	        System.out.println();
 		bookMap.clear();
 	
 	waiting();
@@ -305,6 +308,7 @@ class Count{
         }
 		System.out.println("===수입 총합===");
 		System.out.println(Total_income);
+		System.out.println();
     	bookMap.clear();
     	
     	for(int i = 1; i < 32; i++) {
@@ -358,6 +362,7 @@ class Count{
         }
 		System.out.println("===지출 총합===");
 		System.out.println(Total_outlay);
+		System.out.println();
     	bookMap.clear();
     	
     	for(int i = 1; i < 32; i++) {
@@ -411,7 +416,7 @@ class Count{
         }
 		System.out.println("===빚 총합===");
 		System.out.println(Total_debt);
-    		
+    		System.out.println();
     	waiting();
     	}
     
@@ -441,6 +446,7 @@ class Count{
     }
 	System.out.println("===수입 총합===");
 	System.out.println(Total_income);
+	    System.out.println();
 	bookMap.clear();
 	
 	System.out.println("====지출====");
@@ -455,6 +461,7 @@ class Count{
     }
 	System.out.println("===지출 총합===");
 	System.out.println(Total_outlay);
+	    System.out.println();
 	bookMap.clear();
 	
 	System.out.println("====빚====");
@@ -469,6 +476,7 @@ class Count{
     }
 	System.out.println("===빚 총합===");
 	System.out.println(Total_debt);
+	    System.out.println();
 	bookMap.clear();
 	
 	
