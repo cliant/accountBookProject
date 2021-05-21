@@ -37,8 +37,11 @@ class Count{
     //수입 트리
     TreeMap<String,Integer> OutlayMap=new TreeMap<String,Integer>();
     //지출 트리
-    TreeMap<String,Integer> bookMap=new TreeMap<String,Integer>();
- 
+    TreeMap<String,Integer> bookMap_income=new TreeMap<String,Integer>();
+
+    TreeMap<String,Integer> bookMap_outlay=new TreeMap<String,Integer>();
+
+   
    
     //부채받은년월
     LocalDate currDate=LocalDate.now();
@@ -482,10 +485,6 @@ public void waiting() throws Exception{
         System.out.println("끝마치겠습니다.");
         System.exit(0);
     }
- public boolean checkFile(String fileDate) {
-    	File file = new File("income"+fileDate+".txt");
-    	return file.exists();
-    }
      public void book_IncomeFile(String fileDate) throws Exception {
     	
     	if((checkFile(fileDate))){
@@ -507,16 +506,16 @@ public void waiting() throws Exception{
                     String Datasp_is= new String(Datasp_i[0]);
                     Integer Datasp_ii=new Integer(Datasp_i[1]);
                     
-                    if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
+                    if(bookMap_income.isEmpty()) bookMap_income.put(Datasp_is,Datasp_ii);
                     else {
-                    for(String a : bookMap.keySet()) {
-                    	Integer Value = bookMap.get(a);
+                    for(String a : bookMap_income.keySet()) {
+                    	Integer Value = bookMap_income.get(a);
                     	if(Datasp_is.contentEquals(a)) {
                     		Value += Datasp_ii;
-                    		Replace(bookMap, a, Value);
+                    		Replace(bookMap_income, a, Value);
                     	
                     	}
-                    	else bookMap.put(Datasp_is,Datasp_ii);
+                    	else bookMap_income.put(Datasp_is,Datasp_ii);
                     	}
                     }
                    
@@ -548,16 +547,17 @@ public void waiting() throws Exception{
                     String Datasp_is= new String(Datasp_i[0]);
                     Integer Datasp_ii=new Integer(Datasp_i[1]);
                     
-                    if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
+                    if(bookMap_outlay.isEmpty()) bookMap_outlay.put(Datasp_is,Datasp_ii);
                     else {
-                    for(String a : bookMap.keySet()) {
-                    	Integer Value = bookMap.get(a);
-                    	if(Datasp_is.contentEquals(a)) {
-                    		Value += Datasp_ii;
-                    		Replace(bookMap, a, Value);
-                    	
-                    	}
-                    	else bookMap.put(Datasp_is,Datasp_ii);
+                    	    for(String a : bookMap_outlay.keySet()) {
+                        	Integer Value = bookMap_outlay.get(a);
+                        	if(Datasp_is.contentEquals(a)) {
+                        		Value += Datasp_ii;
+                        		Replace(bookMap_income, a, Value);
+                        	
+                        	}
+                        	
+                    	    else bookMap_outlay.put(Datasp_is,Datasp_ii);
                     	}
                     }
                    
