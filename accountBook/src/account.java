@@ -145,7 +145,7 @@ class Count{
         	 	}
         }
 }
-      public void dailyusage() throws Exception {
+     public void dailyusage() throws Exception {
 		
 		Scanner scanner = new Scanner(System.in);
 		Integer Total_income = 0;
@@ -159,27 +159,29 @@ class Count{
 		System.out.println("====수입====");
 		book_IncomeFile(fileDate);
 		
-		for (Entry<String, Integer> entry : bookMap.entrySet()) {
+		for (Entry<String, Integer> entry : bookMap_income.entrySet()) {
             System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
             Total_income += entry.getValue();
         }
 		System.out.println("===수입 총합===");
 		System.out.println(Total_income);
-		bookMap.clear();
+	   	System.out.println();
+		bookMap_income.clear();
 		
 		System.out.println("====지출====");
 		book_OutlayFile(fileDate);
-		for (Entry<String, Integer> entry : bookMap.entrySet()) {
+		for (Entry<String, Integer> entry : bookMap_outlay.entrySet()) {
             System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
             Total_outlay += entry.getValue();
         }
 		System.out.println("===지출 총합===");
 		System.out.println(Total_outlay);
-		bookMap.clear();
+	        System.out.println();
+		bookMap_outlay.clear();
+		
 	
 	waiting();
 	}
-	
 	public void weekusage() throws Exception{
 		
     	Scanner scanner = new Scanner(System.in);
@@ -189,7 +191,7 @@ class Count{
 		
     	System.out.println("==조회할 월을 입력 하시오 (ex 2021-05)==");
     	System.out.print("입력:>>");
-    	String fileMonth = scanner.next();
+    	String fileMonth = scanner.nextLine();
     	
     	System.out.println("==조회할 주차를 입력하시오");
     	System.out.println("입력:>>");
@@ -223,16 +225,16 @@ class Count{
                     Integer Datasp_week = new Integer(Datasp_i_2[3]);
                     
                     if(Datasp_week.equals(Week)) {
-                    if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
+                    if(bookMap_income.isEmpty()) bookMap_income.put(Datasp_is,Datasp_ii);
                     else {
-                    for(String a : bookMap.keySet()) {
-                    	Integer Value = bookMap.get(a);
+                    for(String a : bookMap_income.keySet()) {
+                    	Integer Value = bookMap_income.get(a);
                     	if(Datasp_is.contentEquals(a)) {
                     		Value += Datasp_ii;
-                    		bookMap.replace(a, Value);
+                    		bookMap_income.replace(a, Value);
                     	
                     	}
-                    	else bookMap.put(Datasp_is,Datasp_ii);
+                    	else bookMap_income.put(Datasp_is,Datasp_ii);
                     	}
                     }
                     }
@@ -241,13 +243,14 @@ class Count{
             frIn.close();
     	}
     	}
-    	for (Entry<String, Integer> entry : bookMap.entrySet()) {
+    	for (Entry<String, Integer> entry : bookMap_income.entrySet()) {
             System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
             Total_income += entry.getValue();
         }
 		System.out.println("===수입 총합===");
 		System.out.println(Total_income);
-    	bookMap.clear();
+		System.out.println();
+    	bookMap_income.clear();
     	
     	for(int i = 1; i < 32; i++) {
     		String Date = String.format("%02d", i);
@@ -276,16 +279,16 @@ class Count{
                     Integer Datasp_week = new Integer(Datasp_i_2[3]);
                     
                     if(Datasp_week.equals(Week)) {
-                    if(bookMap.isEmpty()) bookMap.put(Datasp_is,Datasp_ii);
+                    if(bookMap_outlay.isEmpty()) bookMap_outlay.put(Datasp_is,Datasp_ii);
                     else {
-                    for(String a : bookMap.keySet()) {
-                    	Integer Value = bookMap.get(a);
+                    for(String a : bookMap_outlay.keySet()) {
+                    	Integer Value = bookMap_outlay.get(a);
                     	if(Datasp_is.contentEquals(a)) {
                     		Value += Datasp_ii;
-                    		bookMap.replace(a, Value);
+                    		bookMap_outlay.replace(a, Value);
                     	
                     	}
-                    	else bookMap.put(Datasp_is,Datasp_ii);
+                    	else bookMap_outlay.put(Datasp_is,Datasp_ii);
                     	}
                     }
                     }
@@ -294,15 +297,19 @@ class Count{
             frOut.close();
     	}
     	}
-    	for (Entry<String, Integer> entry : bookMap.entrySet()) {
+    	for (Entry<String, Integer> entry : bookMap_outlay.entrySet()) {
             System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
             Total_outlay += entry.getValue();
         }
 		System.out.println("===지출 총합===");
 		System.out.println(Total_outlay);
-    	bookMap.clear();
-
+		System.out.println();
+    	bookMap_outlay.clear();
+    	waiting();
+    	}
+    
     	
+ 
     public void monthlyusage() throws Exception {
     	
     Scanner scanner = new Scanner(System.in);
@@ -321,14 +328,14 @@ class Count{
 		String fileDate = fileMonth +"-" +Date;
 		book_IncomeFile(fileDate);
 	}
-	for (Entry<String, Integer> entry : bookMap.entrySet()) {
+	for (Entry<String, Integer> entry : bookMap_income.entrySet()) {
         System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
         Total_income += entry.getValue();
     }
 	System.out.println("===수입 총합===");
 	System.out.println(Total_income);
 	    System.out.println();
-	bookMap.clear();
+	bookMap_income.clear();
 	
 	System.out.println("====지출====");
 	for(int i = 1; i < 32; i++) {
@@ -336,14 +343,14 @@ class Count{
 		String fileDate = fileMonth +"-" +Date;
 		book_OutlayFile(fileDate);
 	}
-	for (Entry<String, Integer> entry : bookMap.entrySet()) {
+	for (Entry<String, Integer> entry : bookMap_outlay.entrySet()) {
         System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
         Total_outlay += entry.getValue();
     }
 	System.out.println("===지출 총합===");
 	System.out.println(Total_outlay);
 	    System.out.println();
-	bookMap.clear();
+	bookMap_outlay.clear();
 	
 	
 	waiting();
