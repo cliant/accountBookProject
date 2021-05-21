@@ -574,6 +574,7 @@ public void waiting() throws Exception{
 	 Scanner scanner = new Scanner(System.in);
 	 
 	 System.out.println("==날짜를 지정하시오.==");
+	 System.out.println("입력:>>");
 	 String new_date = scanner.next();
 	 
 	 this.currDate = this.currDate.parse(new_date);
