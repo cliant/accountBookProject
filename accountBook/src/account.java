@@ -22,9 +22,10 @@ public class account{
             else if(No.equals("4")) count.save();
             else if(No.equals("5")) count.mout();
             else if(No.equals("6")) count.modify();
-            else if(No.equals("7")) count.end();
+             else if(No.equals("7")) count.set_date();
+            else if(No.equals("8")) count.end();
             else {
-            	 System.out.println("1~7 사이의 숫자를 입력해주세요.");
+            	 System.out.println("1~8 사이의 숫자를 입력해주세요.");
             	 	continue;
             	 	}
         }
@@ -64,7 +65,8 @@ class Count{
         System.out.printf("│           4. 저장 하기             │\n");
         System.out.printf("│           5. 메모리해제            │\n");
         System.out.printf("│           6. 수정 하기             │\n");
-        System.out.printf("│           7. 종     료             │\n");
+        System.out.printf("│           7. 날짜 설정             |\n");
+        System.out.printf("│           8. 종료                  │\n");
         System.out.printf("└──────────────────┘\n");
         System.out.print("입력:>>");
     }
@@ -567,5 +569,28 @@ public void waiting() throws Exception{
     }
   public void Replace(TreeMap a,String Key, Integer Value) {
 	 a.replace(Key, Value);
+ }
+	 public void set_date() {
+	 Scanner scanner = new Scanner(System.in);
+	 
+	 System.out.println("==날짜를 지정하시오.==");
+	 String new_date = scanner.next();
+	 
+	 this.currDate = this.currDate.parse(new_date);
+	 
+	 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	 String formattedString = this.currDate.format(formatter);
+	 
+	 Calendar calendar = Calendar.getInstance();
+
+	 String[] SplitString = formattedString.split("-");
+	 int year = Integer.parseInt(SplitString[0]);
+	 int month = Integer.parseInt(SplitString[1]);
+	 int day = Integer.parseInt(SplitString[2]);
+	 calendar.set(year, month, day);
+	 int week = calendar.get(Calendar.WEEK_OF_MONTH);
+	 
+	 today_date = formattedString + "-" + week;
+
  }
 }
