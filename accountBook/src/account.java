@@ -19,13 +19,12 @@ public class account{
             if(No.equals("1")) count.income();
             else if(No.equals("2")) count.outlay();
             else if(No.equals("3")) count.book();
-            else if(No.equals("4")) count.load();
-            else if(No.equals("5")) count.save();
-            else if(No.equals("6")) count.mout();
-            else if(No.equals("7")) count.modify();
-            else if(No.equals("8")) count.end();
+            else if(No.equals("4")) count.save();
+            else if(No.equals("5")) count.mout();
+            else if(No.equals("6")) count.modify();
+            else if(No.equals("7")) count.end();
             else {
-            	 System.out.println("1~8 사이의 숫자를 입력해주세요.");
+            	 System.out.println("1~7 사이의 숫자를 입력해주세요.");
             	 	continue;
             	 	}
         }
@@ -58,18 +57,16 @@ class Count{
     static final int SIZE=1000000;
     //메뉴
     public void menu() throws Exception{  //예외처리?
-        System.out.printf("┌──────────────────┐\n");
+         System.out.printf("┌──────────────────┐\n");
         System.out.printf("│           1. 수입 입력             │\n");
         System.out.printf("│           2. 지출 입력             │\n");
         System.out.printf("│           3. 장부 보기             │\n");
-        System.out.printf("│           4. 불러 오기             │\n");
-        System.out.printf("│           5. 저장 하기             │\n");
-        System.out.printf("│           6. 메모리해제            │\n");
-        System.out.printf("│           7. 수정 하기             │\n");
-        System.out.printf("│           8. 종     료             │\n");
+        System.out.printf("│           4. 저장 하기             │\n");
+        System.out.printf("│           5. 메모리해제            │\n");
+        System.out.printf("│           6. 수정 하기             │\n");
+        System.out.printf("│           7. 종     료             │\n");
         System.out.printf("└──────────────────┘\n");
         System.out.print("입력:>>");
- 
     }
     //수입
     public void income() throws Exception{
