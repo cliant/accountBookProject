@@ -145,7 +145,7 @@ class Count{
         	 	}
         }
 }
-   public void dailyusage() throws Exception {
+      public void dailyusage() throws Exception {
 		
 		Scanner scanner = new Scanner(System.in);
 		Integer Total_income = 0;
@@ -165,7 +165,6 @@ class Count{
         }
 		System.out.println("===수입 총합===");
 		System.out.println(Total_income);
-	   	System.out.println();
 		bookMap.clear();
 		
 		System.out.println("====지출====");
@@ -176,12 +175,11 @@ class Count{
         }
 		System.out.println("===지출 총합===");
 		System.out.println(Total_outlay);
-	        System.out.println();
 		bookMap.clear();
-		
 	
 	waiting();
 	}
+	
 	public void weekusage() throws Exception{
 		
     	Scanner scanner = new Scanner(System.in);
@@ -234,7 +232,7 @@ class Count{
                     		bookMap.replace(a, Value);
                     	
                     	}
-                    	else bookMap.put(Datasp_is,Datsp_ii);
+                    	else bookMap.put(Datasp_is,Datasp_ii);
                     	}
                     }
                     }
@@ -249,7 +247,6 @@ class Count{
         }
 		System.out.println("===수입 총합===");
 		System.out.println(Total_income);
-		System.out.println();
     	bookMap.clear();
     	
     	for(int i = 1; i < 32; i++) {
@@ -303,13 +300,9 @@ class Count{
         }
 		System.out.println("===지출 총합===");
 		System.out.println(Total_outlay);
-		System.out.println();
     	bookMap.clear();
-    	waiting();
-    	}
-    
+
     	
- 
     public void monthlyusage() throws Exception {
     	
     Scanner scanner = new Scanner(System.in);
