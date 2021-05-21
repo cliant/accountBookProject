@@ -22,7 +22,7 @@ public class account{
             else if(No.equals("4")) count.save();
             else if(No.equals("5")) count.mout();
             else if(No.equals("6")) count.modify();
-             else if(No.equals("7")) count.set_date();
+            else if(No.equals("7")) count.set_date();
             else if(No.equals("8")) count.end();
             else {
             	 System.out.println("1~8 사이의 숫자를 입력해주세요.");
@@ -38,13 +38,14 @@ class Count{
     TreeMap<String,Integer> OutlayMap=new TreeMap<String,Integer>();
     //지출 트리
     TreeMap<String,Integer> bookMap_income=new TreeMap<String,Integer>();
-
+    //수출트리 
     TreeMap<String,Integer> bookMap_outlay=new TreeMap<String,Integer>();
 
    
-   
     //부채받은년월
-    LocalDate currDate=LocalDate.now();
+    LocalDate curr=LocalDate.now();
+    LocalDate currDate=curr.withDayOfMonth(22);
+    
     //부채가 계산되는 년월
     LocalDate nextDate=LocalDate.now();
    //현재 날짜 및 시간
@@ -61,17 +62,18 @@ class Count{
     static final int SIZE=1000000;
     //메뉴
     public void menu() throws Exception{  //예외처리?
-         System.out.printf("┌──────────────────┐\n");
+        System.out.printf("┌──────────────────┐\n");
         System.out.printf("│           1. 수입 입력             │\n");
         System.out.printf("│           2. 지출 입력             │\n");
         System.out.printf("│           3. 장부 보기             │\n");
         System.out.printf("│           4. 저장 하기             │\n");
-        System.out.printf("│           5. 메모리해제            │\n");
+        System.out.printf("│           5. 메모리해제           │\n");
         System.out.printf("│           6. 수정 하기             │\n");
         System.out.printf("│           7. 날짜 설정             |\n");
-        System.out.printf("│           8. 종료                  │\n");
+        System.out.printf("│           8. 종료                    │\n");
         System.out.printf("└──────────────────┘\n");
         System.out.print("입력:>>");
+ 
     }
     //수입
     public void income() throws Exception{
@@ -145,7 +147,7 @@ class Count{
         	 	}
         }
 }
-     public void dailyusage() throws Exception {
+   public void dailyusage() throws Exception {
 		
 		Scanner scanner = new Scanner(System.in);
 		Integer Total_income = 0;
@@ -363,7 +365,6 @@ public void waiting() throws Exception{
 	anykey = br.readLine();
 }
 
-    
     //저장하기
    public void save() throws Exception{
         File fileIn=new File("income"+this.currDate+".txt");
@@ -413,7 +414,7 @@ public void waiting() throws Exception{
   // 이터 항목 금액 수정하기
     public void modify() {
     	Scanner s = new Scanner(System.in);
-    	   System.out.printf("┌──────────────────┐\n");
+    	System.out.printf("┌──────────────────┐\n");
         System.out.printf("│           1. 수입 수정             │\n");
         System.out.printf("│           2. 지출 수정             │\n");
         System.out.printf("│           3. 메뉴로 가기             │\n");
@@ -485,6 +486,12 @@ public void waiting() throws Exception{
         System.out.println("끝마치겠습니다.");
         System.exit(0);
     }
+    
+    public boolean checkFile(String fileDate) {
+    	File file = new File("income"+fileDate+".txt");
+    	return file.exists();
+    }
+ 
      public void book_IncomeFile(String fileDate) throws Exception {
     	
     	if((checkFile(fileDate))){
@@ -549,14 +556,13 @@ public void waiting() throws Exception{
                     
                     if(bookMap_outlay.isEmpty()) bookMap_outlay.put(Datasp_is,Datasp_ii);
                     else {
-                    	    for(String a : bookMap_outlay.keySet()) {
+                    for(String a : bookMap_outlay.keySet()) {
                         	Integer Value = bookMap_outlay.get(a);
                         	if(Datasp_is.contentEquals(a)) {
                         		Value += Datasp_ii;
                         		Replace(bookMap_income, a, Value);
                         	
                         	}
-                        	
                     	    else bookMap_outlay.put(Datasp_is,Datasp_ii);
                     	}
                     }
@@ -567,15 +573,17 @@ public void waiting() throws Exception{
     	}
 
     }
-  public void Replace(TreeMap a,String Key, Integer Value) {
+ public void Replace(TreeMap a,String Key, Integer Value) {
 	 a.replace(Key, Value);
  }
-	 public void set_date() {
+ 
+ public void set_date() {
 	 Scanner scanner = new Scanner(System.in);
 	 
 	 System.out.println("==날짜를 지정하시오.==");
 	 System.out.println("입력:>>");
 	 String new_date = scanner.next();
+	 
 	 
 	 this.currDate = this.currDate.parse(new_date);
 	 
@@ -594,4 +602,3 @@ public void waiting() throws Exception{
 	 today_date = formattedString + "-" + week;
 
  }
-}
