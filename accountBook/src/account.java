@@ -229,7 +229,7 @@ class Count{
                     		bookMap.replace(a, Value);
                     	
                     	}
-                    	else bookMap.put(Datasp_is,Value);
+                    	else bookMap.put(Datasp_is,Datsp_ii);
                     	}
                     }
                     }
@@ -283,7 +283,7 @@ class Count{
                     		bookMap.replace(a, Value);
                     	
                     	}
-                    	else bookMap.put(Datasp_is,Value);
+                    	else bookMap.put(Datasp_is,Datasp_ii);
                     	}
                     }
                     }
@@ -358,137 +358,7 @@ public void waiting() throws Exception{
 	anykey = br.readLine();
 }
 
-    //불러오기
-    public void load() throws Exception{
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("==가계부 불러오기==");
- 
-        //날짜 입력은 실례로 "2019-12-19"로 입력하세요.
-        System.out.print("날짜(년월일)입력:>>");
-        String fileDate=scanner.next();
-       
-        if((checkFile(fileDate))){
-        
-        File fileIn=new File("income"+fileDate+".txt");
-        FileReader frIn=new FileReader(fileIn);
- 
-        File fileOut=new File("outlay"+fileDate+".txt");
-        FileReader frOut=new FileReader(fileOut);
- 
-        File fileDebt=new File("debt"+fileDate+".txt");
-        FileReader frDebt=new FileReader(fileDebt);
-        
-       
-        int readCharNo;
-        char[] cbuf=new char[SIZE];
-        //키값
- 
-        while((readCharNo=frIn.read(cbuf)) != -1){
-            String iData=new String(cbuf,0,readCharNo);
-            //0 ~ readCharNo까지 문자열 생성
- 
-            StringTokenizer Datasp=new StringTokenizer(iData,"\r\n");
-            // \r\n으로 문자열 쪼개기
- 
-            while(Datasp.hasMoreTokens()){ //토큰이 남아있는지 여부
-                String token=Datasp.nextToken();  //구분자로 쪼개진 문자열 반환
-                String[] Datasp_i=token.split(":"); //&기준으로 찢어 string 형 배열로 반환
-                String Datasp_is=new String(Datasp_i[0]);
-                Integer Datasp_ii=new Integer(Datasp_i[1]);
-                IncomeMap.put(Datasp_is,Datasp_ii);
-               if(IncomeMap.isEmpty()) IncomeMap.put(Datasp_is,Datasp_ii);
-                else {
-                for(String i : IncomeMap.keySet()) {
-                	Integer Value = IncomeMap.get(i);
-                	if(Datasp_is.contentEquals(i)) {
-                		Value += Datasp_ii;
-                		IncomeMap.replace(i, Value);
-                	
-                	}
-                	else IncomeMap.put(Datasp_is,Value);
-                	}
-                }
-           }
-        }
-        frIn.close();
- 
-        int readCharNo_1;
-        char[] cbuf_1=new char[SIZE];
- 
-        while((readCharNo_1=frOut.read(cbuf_1)) != -1){
-            String iData_1=new String(cbuf_1,0,readCharNo_1);
- 
-            StringTokenizer Datasp_1=new StringTokenizer(iData_1,"\r\n");
- 
-            while(Datasp_1.hasMoreTokens()){
-                String token_1=Datasp_1.nextToken();
-                String[] Datasp_i_1=token_1.split(":");
-                String Datasp_is_1=new String(Datasp_i_1[0]);
-                Integer Datasp_ii_1=new Integer(Datasp_i_1[1]);
-               if(OutlayMap.isEmpty()) IncomeMap.put(Datasp_is_1,Datasp_ii_1);
-                else {
-                for(String i : IncomeMap.keySet()) {
-                	Integer Value = IncomeMap.get(i);
-                	if(Datasp_is_1.contentEquals(i)) {
-                		Value += Datasp_ii_1;
-                		IncomeMap.replace(i, Value);
-                	
-                	}
-                	else IncomeMap.put(Datasp_is_1,Value);
-                	}
-                }
-           }
-        }
-        frOut.close();
- 
-        int readCharNo_2;
-        char[] cbuf_2=new char[SIZE];
- 
-        while((readCharNo_2=frDebt.read(cbuf_2)) != -1){
-            String iData_2=new String(cbuf_2,0,readCharNo_2);
- 
-            StringTokenizer Datasp_2=new StringTokenizer(iData_2,"\r\n");
- 
-            while(Datasp_2.hasMoreTokens()){
-                String token_2=Datasp_2.nextToken();
-                String[] Datasp_i_2=token_2.split(":");
-                String Datasp_is_2=new String(Datasp_i_2[0]);
-                Integer Datasp_ii_2=new Integer(Datasp_i_2[1]);
-                oldDate=LocalDate.parse(Datasp_i_2[2]); //옛날 날짜 불러오기
-                if(OutlayMap.isEmpty()) IncomeMap.put(Datasp_is_2,Datasp_ii_2);
-                else {
-                for(String i : IncomeMap.keySet()) {
-                	Integer Value = IncomeMap.get(i);
-                	if(Datasp_is_2.contentEquals(i)) {
-                		Value += Datasp_ii_2;
-                		IncomeMap.replace(i, Value);
-                	
-                	}
-                	else IncomeMap.put(Datasp_is_2,Value);
-                	}
-                }
-           }
-        }
-        frDebt.close();
-        System.out.println("불러오기되었습니다.");
-        
-        //불러온 내용 출력
-        
-        System.out.println("수입 목록");
-        for (Entry<String, Integer> entry : IncomeMap.entrySet()) {
-            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
-        }
-        
-        System.out.println("지출 목록");
-        for (Entry<String, Integer> entry : OutlayMap.entrySet()) {
-            System.out.println("[항목]:" + entry.getKey() + " [금액]:" + entry.getValue());
-        }
-        
-	}
-        else {
-        	System.out.println("파일이 없습니다.");
-        }
-    }
+    
     //저장하기
    public void save() throws Exception{
         File fileIn=new File("income"+this.currDate+".txt");
