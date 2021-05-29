@@ -128,7 +128,7 @@ class Count{
     	        System.out.printf("┌────────────────────┐\n");
     	        System.out.printf("│  1. 수입 트리 조회     │\n");
     	        System.out.printf("│  2. 지출 트리 조회     │\n");
-    	        System.out.printf("│  3. 종료             │\n");
+    	        System.out.printf("│  3. 종료            │\n");
     	        System.out.printf("└────────────────────┘\n");
     	        System.out.print("입력:>>");
     	        Scanner b = new Scanner(System.in);
