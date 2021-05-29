@@ -1,3 +1,4 @@
+package account;
 import java.lang.*;
 import java.io.*;
 import java.util.*;
@@ -6,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 import java.util.Map.Entry;
 import java.time.format.DateTimeFormatter;
-public class account{
+public class account_project{
     public static void main(String[] args) throws Exception{
         Count count=new Count();
 
@@ -18,14 +19,15 @@ public class account{
             String No=choice.trim();  // 앞뒤 공백제거
             if(No.equals("1")) count.income();
             else if(No.equals("2")) count.outlay();
-            else if(No.equals("3")) count.book();
-            else if(No.equals("4")) count.save();
-            else if(No.equals("5")) count.mout();
-            else if(No.equals("6")) count.modify();
-            else if(No.equals("7")) count.set_date();
-            else if(No.equals("8")) count.end();
+            else if(No.equals("3")) count.load();
+            else if(No.equals("4")) count.book();
+            else if(No.equals("5")) count.save();
+            else if(No.equals("6")) count.mout();
+            else if(No.equals("7")) count.modify();
+            else if(No.equals("8")) count.set_date();
+            else if(No.equals("9")) count.end();
             else {
-            	 System.out.println("1~8 사이의 숫자를 입력해주세요.");
+            	 System.out.println("1~9 사이의 숫자를 입력해주세요.");
             	 	continue;
             	 	}
         }
@@ -42,12 +44,11 @@ class Count{
     TreeMap<String,Integer> bookMap_outlay=new TreeMap<String,Integer>();
 
    
-    //부채받은년월
-    LocalDate curr=LocalDate.now();
-    LocalDate currDate=curr.withDayOfMonth(22);
     
-    //부채가 계산되는 년월
-    LocalDate nextDate=LocalDate.now();
+    LocalDate currDate=LocalDate.now();
+    
+    
+    
    //현재 날짜 및 시간
    LocalDateTime today = LocalDateTime.now();
    //날짜 형식
@@ -56,8 +57,7 @@ class Count{
    DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DatePattern);
     //지정한 형식에 맞게 날짜 저장
    String today_date = today.format(dtf);
-    //옛날 날짜
-    LocalDate oldDate=null;
+    
     //파일불러올때 데이터 상수
     static final int SIZE=1000000;
     //메뉴
@@ -65,12 +65,13 @@ class Count{
         System.out.printf("┌──────────────────┐\n");
         System.out.printf("│           1. 수입 입력             │\n");
         System.out.printf("│           2. 지출 입력             │\n");
-        System.out.printf("│           3. 장부 보기             │\n");
-        System.out.printf("│           4. 저장 하기             │\n");
-        System.out.printf("│           5. 메모리해제           │\n");
-        System.out.printf("│           6. 수정 하기             │\n");
-        System.out.printf("│           7. 날짜 설정             |\n");
-        System.out.printf("│           8. 종료                    │\n");
+        System.out.printf("│           3. 수입,지출트리 조회       │\n");
+        System.out.printf("│           4. 장부 보기             │\n");
+        System.out.printf("│           5. 저장 하기             │\n");
+        System.out.printf("│           6. 메모리해제             │\n");
+        System.out.printf("│           7. 수정 하기             │\n");
+        System.out.printf("│           8. 날짜 설정             |\n");
+        System.out.printf("│           9. 종료                 │\n");
         System.out.printf("└──────────────────┘\n");
         System.out.print("입력:>>");
  
@@ -122,13 +123,77 @@ class Count{
         else OutlayMap.put(rm_blank,outmonstr);
         System.out.println("지출되었습니다.");
     }
+    public void load() throws Exception {
+    	 while(true) {
+    	        System.out.printf("┌────────────────────┐\n");
+    	        System.out.printf("│  1. 수입 트리 조회     │\n");
+    	        System.out.printf("│  2. 지출 트리 조회     │\n");
+    	        System.out.printf("│  3. 종료             │\n");
+    	        System.out.printf("└────────────────────┘\n");
+    	        System.out.print("입력:>>");
+    	        Scanner b = new Scanner(System.in);
+    	        String choice = b.nextLine();
+    	        String No=choice.trim();
+    	        
+    	        if(No.equals("1"))
+    	        {
+    	        	System.out.println("----------수입트리---------");
+    	        	Set<String>keys=IncomeMap.keySet();
+    	        	Iterator<String>itr=keys.iterator();
+    	        	if(!IncomeMap.isEmpty()) {
+    	        		
+    	        	while(itr.hasNext())
+    	        	{
+    	        		String key=itr.next();
+    	        		Integer value=IncomeMap.get(key);
+    	        		 System.out.println("[항목]:" + key + " [금액]:" + value);
+    	        	}
+    	        		
+    	        	}
+    	        	else
+    	        	{
+    	        		System.out.println("수입 트리에 데이터가 존재하지 않습니다.");
+    	        	}
+    	        }
+    	        else if(No.equals("2"))
+    	        {
+    	        	System.out.println("----------지출트리---------");
+    	        	Set<String>keys=OutlayMap.keySet();
+    	        	Iterator<String>itr=keys.iterator();
+    	        	if(!OutlayMap.isEmpty()) {
+    	        	while(itr.hasNext())
+    	        	{
+    	        		String key=itr.next();
+    	        		Integer value=OutlayMap.get(key);
+    	        		 System.out.println("[항목]:" + key + " [금액]:" + value);
+    	        	}
+    	        	}
+    	        	else
+    	        	{
+    	        		System.out.println("지출 트리에 데이터가 존재하지 않습니다.");
+    	        	}
+    	        		
+    	        	
+    	        }
+    	        else if(No.equals("3"))
+    	        {
+    	        		
+    	           break;	
+    	        }
+    	        else
+    	        {
+    	        	System.out.println("1~3 사이의 숫자를 입력해주세요");
+    	        }
+    	 }
+    	
+    }
    
     //장부
    public void book() throws Exception{
        
         while(true) {
         System.out.printf("┌────────────────────┐\n");
-        System.out.printf("│  1. 일별 수입,지출  │\n");
+        System.out.printf("│  1. 금일 수입,지출  │\n");
         System.out.printf("│  2. 주차별 수입,지출│\n");
         System.out.printf("│  3. 월별 수입,지출  │\n");
         System.out.printf("│  4. 종료           │\n");
@@ -189,7 +254,6 @@ class Count{
     	Scanner scanner = new Scanner(System.in);
     	Integer Total_income = 0;
 		Integer Total_outlay = 0;
-		Integer Total_debt = 0;
 		
     	System.out.println("==조회할 월을 입력 하시오 (ex 2021-05)==");
     	System.out.print("입력:>>");
@@ -317,7 +381,7 @@ class Count{
     Scanner scanner = new Scanner(System.in);
     Integer Total_income = 0;
 	Integer Total_outlay = 0;
-	Integer Total_debt = 0;
+	
 	
     	
 	System.out.println("==조회할 월을 입력 하시오 (ex 2021-05)==");
@@ -404,15 +468,80 @@ public void waiting() throws Exception{
     
     //메모리해제
     public void mout() throws Exception{
-        IncomeMap.clear();
+    	while(true) {
+    	Scanner s = new Scanner(System.in);
+    	 System.out.printf("┌──────────────────────────┐\n");
+         System.out.printf("│  1. 수입 트리 삭제           │\n");
+         System.out.printf("│  2. 지출 트리 삭제           │\n");
+         System.out.printf("│  3. 수입,지출 트리 데이터 비우기 │\n");
+         System.out.printf("│  4. 종료                  │\n");
+         System.out.printf("└──────────────────────────┘\n");
+         System.out.print("입력:>>");
+    	 String choice= s.nextLine();
+    	 String rm_blank=choice.trim();
+    	if(rm_blank.equals("1"))
+    	{
+    		System.out.print("삭제할 수입 항목을 입력하세요>>");
+    		String key=s.nextLine();
+    		String rm_key=key.trim();
+    		Set<String>keys=IncomeMap.keySet();
+    		Iterator<String>itr=keys.iterator();
+    		if(IncomeMap.containsKey(rm_key)) {
+    		while(itr.hasNext())
+    		{
+    			if(itr.next().equals(rm_key))
+    			{
+    				itr.remove();
+    				System.out.println("입력하신 항목 "+rm_key+"가 삭제되었습니다.");
+    			}
+    		}
+    		
+    		}
+    		else
+    			System.out.println("입력하신 항목이 수입트리에 존재하지 않습니다.");
+    		
+    	}
+    	else if(rm_blank.equals("2"))
+    	{
+    		System.out.print("삭제할 지출 항목을 입력하세요>>");
+    		String key=s.nextLine();
+    		String rm_key=key.trim();
+    		Set<String>keys=OutlayMap.keySet();
+    		Iterator<String>itr=keys.iterator();
+    		if(OutlayMap.containsKey(rm_key)) {
+    		while(itr.hasNext())
+    		{
+    			if(itr.next().equals(rm_key))
+    			{
+    				itr.remove();
+    				System.out.println("입력하신 항목 "+rm_key+"가 삭제되었습니다.");
+    			}
+    		}
+    		}
+    		else
+    			System.out.println("입력하신 항목이 지출트리에 존재하지 않습니다.");
+    	}
+    	
+    	else if(rm_blank.equals("3")) {
+    	IncomeMap.clear();
         OutlayMap.clear();
+        System.out.println("수입,지출에 저장된 데이터가 모두 삭제되었습니다.");
+       
+    	}
+    	else if(rm_blank.equals("4")) {
+    		break;
+    	}
+    	else 
+    	{
+    		System.out.println("1~4 사이의 숫자를 입력해주세요.");
+    		
+    	}
+    	}
  
-        this.oldDate=null;
- 
-        System.out.println("메모리 해제되었습니다.");
-    }
+          }
   // 이터 항목 금액 수정하기
-    public void modify() {
+    public void modify() throws Exception{
+    		while(true) {
     	Scanner s = new Scanner(System.in);
     	System.out.printf("┌──────────────────┐\n");
         System.out.printf("│           1. 수입 수정             │\n");
@@ -423,9 +552,7 @@ public void waiting() throws Exception{
     	String choice = s.nextLine();
     	String No = choice.trim(); //공백제거
     	
-    	switch(No)
-    	{
-    	case "1" :
+    	if(No.equals("1")) {
     		System.out.print("수정할 항목 입력>>");
     		String mod= s.nextLine();
     		String mod_in= mod.trim();
@@ -440,15 +567,14 @@ public void waiting() throws Exception{
     			System.out.println("----------수정후-----------");
     			System.out.println("[항목]:" + mod_in + " [금액]:" + IncomeMap.get(mod_in)+"\n");
     			System.out.println("수입이 성공적으로 수정되었습니다.");
-    			break;   			
+    			   			
     		}
     		else {
     			System.out.println("입력한 항목 "+mod_in+"이(가) 존재하지 않습니다.");
-    			this.modify();
     		}
-    		   break;
+    	}
     		
-    	case "2" :
+    	else if(No.equals("2")) {
     		System.out.print("수정할 항목 입력>>");
     		String mod2= s.nextLine();
     		String mod_out= mod2.trim();
@@ -463,24 +589,24 @@ public void waiting() throws Exception{
     			System.out.println("----------수정후-----------");
     			System.out.println("[항목]:" + mod_out + " [금액]:" + OutlayMap.get(mod_out)+"\n");
     			System.out.println("지출이 성공적으로 수정되었습니다.");
-    			break;   			
+    		   			
     		}
     		else {
     			System.out.println("입력한 항목 "+mod_out+"이(가) 존재하지 않습니다.");
-    			this.modify();
+    			
     		}
-    		   break;
     
-    		
-    	case "3" :
+    	}
+    	else if(No.equals("3")) {
     		break;
-    	default:
+    	}
+    	else
     		 System.out.println("1~3 사이의 숫자를 입력해주세요.");
-    		 this.modify();
     	
     	}
     	
-    }
+    		}
+    
     //끝마침
     public void end() throws Exception{
         System.out.println("끝마치겠습니다.");
