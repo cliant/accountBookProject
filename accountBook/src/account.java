@@ -128,7 +128,7 @@ class Count{
        
         while(true) {
         System.out.printf("┌────────────────────┐\n");
-        System.out.printf("│  1. 금일 수입,지출  │\n");
+        System.out.printf("│  1. 일별 수입,지출  │\n");
         System.out.printf("│  2. 주차별 수입,지출│\n");
         System.out.printf("│  3. 월별 수입,지출  │\n");
         System.out.printf("│  4. 종료           │\n");
