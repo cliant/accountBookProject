@@ -62,17 +62,17 @@ class Count{
     static final int SIZE=1000000;
     //메뉴
     public void menu() throws Exception{  //예외처리?
-        System.out.printf("┌──────────────────┐\n");
-        System.out.printf("│           1. 수입 입력             │\n");
-        System.out.printf("│           2. 지출 입력             │\n");
-        System.out.printf("│           3. 수입,지출트리 조회       │\n");
-        System.out.printf("│           4. 장부 보기             │\n");
-        System.out.printf("│           5. 저장 하기             │\n");
-        System.out.printf("│           6. 메모리해제             │\n");
-        System.out.printf("│           7. 수정 하기             │\n");
-        System.out.printf("│           8. 날짜 설정             |\n");
-        System.out.printf("│           9. 종료                 │\n");
-        System.out.printf("└──────────────────┘\n");
+        System.out.printf("┌──────────────────────┐\n");
+        System.out.printf("│  1. 수입 입력         │\n");
+        System.out.printf("│  2. 지출 입력         │\n");
+        System.out.printf("│  3. 수입,지출트리 조회 │\n");
+        System.out.printf("│  4. 장부 보기         │\n");
+        System.out.printf("│  5. 저장 하기         │\n");
+        System.out.printf("│  6. 메모리해제        │\n");
+        System.out.printf("│  7. 수정 하기         │\n");
+        System.out.printf("│  8. 날짜 설정         |\n");
+        System.out.printf("│  9. 종료             │\n");
+        System.out.printf("└──────────────────────┘\n");
         System.out.print("입력:>>");
  
     }
@@ -192,12 +192,12 @@ class Count{
    public void book() throws Exception{
        
         while(true) {
-        System.out.printf("┌────────────────────┐\n");
-        System.out.printf("│  1. 금일 수입,지출  │\n");
-        System.out.printf("│  2. 주차별 수입,지출│\n");
-        System.out.printf("│  3. 월별 수입,지출  │\n");
-        System.out.printf("│  4. 종료           │\n");
-        System.out.printf("└────────────────────┘\n");
+        System.out.printf("┌──────────────────────┐\n");
+        System.out.printf("│  1. 일 별 수입,지출   │\n");
+        System.out.printf("│  2. 주차 별 수입,지출 │\n");
+        System.out.printf("│  3. 월 별 수입,지출   │\n");
+        System.out.printf("│  4. 종료             │\n");
+        System.out.printf("└──────────────────────┘\n");
         System.out.print("입력:>>");
         Scanner b = new Scanner(System.in);
         String choice = b.nextLine();
