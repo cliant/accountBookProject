@@ -450,7 +450,7 @@ public void waiting() throws Exception{
         }
         fwIn.flush();
         fwIn.close();
- 
+ 	IncomeMap.clear();
         Set<String> keySetOut=OutlayMap.keySet();
         Iterator<String> keyIteratorOut=keySetOut.iterator();
         while(keyIteratorOut.hasNext()){
@@ -460,7 +460,7 @@ public void waiting() throws Exception{
         }
         fwOut.flush();
         fwOut.close();
- 
+ 	OutlayMap.clear();
        
  
         System.out.println("저장되었습니다.");
